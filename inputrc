@@ -1,0 +1,33 @@
+
+# want vi to be the default editor for readline
+set editing-mode vi
+set convert-meta on
+
+# vi settings
+$if mode=vi
+
+	# normal mode
+	set keymap vi-command
+	"d": backward-char
+	"h": previous-history
+	"t": next-history
+	"n": forward-char
+
+	"H": beginning-of-history
+	"T": end-of-history
+
+	# set up shortcuts close to what i'm used to in vim in dvorrak layout
+	"r": beginning-of-line
+	"l": end-of-line
+	"k": vi-search-again
+	"K": vi-search-again
+
+	"m": vi-end-word
+	"e": vi-delete-to
+	# insert mode
+	set keymap vi-insert
+	# remap escape
+	"hh": vi-movement-mode
+
+$endif 
+
