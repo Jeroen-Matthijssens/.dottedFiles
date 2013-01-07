@@ -16,7 +16,7 @@ RED="\[\033[38;5;196m\]"
 NORMAL="\[\033[0m\]"
 
 CORNERDOWN="\342\224\214"; CORNERUP="\342\224\224"; DASH="\342\224\200"
-DELTA_CHAR="✜" # "▲" # "✏" # "△"
+DELTA_CHAR="✜"
 ERROR="$BRED\342\234\227"; SUCCES="$BGREEN\342\234\223"
 
 git_branch_name () {
@@ -61,32 +61,32 @@ dir_info () {
 	echo -n "$(ls -lah | grep -m 1 total | sed 's/total //')"
 }
 
-bash_prompt_cmd () {
-	# Lets see what I can congure up.
+jobs_info () {
+	local nrOfJobs="$(jobs | wc -l)"
 
+	if [[ "$nrOfJobs" > 1 ]]; then echo -n "$RED\j jobs";
+	elif [[ "$nrOfJobs" == 1 ]]; then echo -n "$RED\j job"
+	fi
+}
+
+bash_prompt_cmd () {
 	# Start off with a newline, otherwise things look cluthered.
-	local firstLine="\n$FADED$CORNERDOWN"
+	local firstLine="\n$FADED$CORNERDOWN("
 	
 	# Creating user / hostname part
-	firstLine+="(";
-	if [[ ${EUID} == 0 ]]; then
-		firstLine+="${RED}\h";
-	else
-		firstLine+="$WHITE\u $FADED@ $WHITE\h";
+	if [[ ${EUID} == 0 ]]; then firstLine+=" $BRED\h$NORMAL ";
+	else firstLine+=" $WHITE\u $FADED@ $WHITE\h ";
 	fi
 
-	# Add workinf directory information.
-	firstLine+="$FADED)$DASH($GREEN \w$FADED"
-
-	# Add potential version controll infomation.
-	firstLine+="$(git_info)"
+	# Add (potential version contral info and directory information.
+	firstLine+="$FADED)$DASH($(git_info) $GREEN\w$FADED"
 
 	# Add number of files and size. (does'n seem particulary useful though.
-	firstLine+=" $FADED| $GREEN$(dir_info)$FADED )"
+	firstLine+=" $FADED| $WHITE$(dir_info)$FADED )"
 
 	# Show the number of stopped jobs, but only if there are any.
-	if [[ -n "$(jobs)" ]]; then firstLine+="$DASH($RED\j jobs$NORMAL$FADED)"; fi
-	
+	if [[ -n "$(jobs)" ]]; then firstLine+="$DASH( $(jobs_info) $FADED)"; fi
+
 	local secondLine="\n$FADED$CORNERUP$DASH("
 
 	# Show whether or not the last command was successful.
