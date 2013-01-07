@@ -1,0 +1,106 @@
+# Costumizing bash prompt.
+
+# TODO:
+# - show whether we are rebasing or not.
+# - counting of files will not work when there are merge conflicts.
+
+# Define color sequences.
+FADED="\[\033[38;5;102m\]"; WHITE="\[\033[38;5;231m\]"
+GREEN="\[\033[38;5;149m\]"; BGREEN="\[\033[1;32m\]"
+RED="\[\033[38;5;196m\]"; BRED="\[\033[1;31m\]"
+
+BLUE="\[\033[38;5;81m\]"
+YELLOW="\[\033[38;5;208m\]"
+RED="\[\033[38;5;196m\]"
+
+NORMAL="\[\033[0m\]"
+
+CORNERDOWN="\342\224\214"; CORNERUP="\342\224\224"; DASH="\342\224\200"
+DELTA_CHAR="✜" # "▲" # "✏" # "△"
+ERROR="$BRED\342\234\227"; SUCCES="$BGREEN\342\234\223"
+
+git_branch_name () {
+	echo "$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
+}
+
+git_dirty () {
+	local status="$(git status --porcelain)"
+
+	local staged="$(echo "$status" | grep -c ^\[^\ ?\])"
+	local untracked="$(echo "$status" | grep -c \^??)"
+	local unstaged="$(echo "$status" | grep -c \^\ )"
+
+	if [[ "$unstaged" -ne 0 ]]; then echo -n " $RED$1$FADED"
+	elif [[ "$staged" -ne 0 ]]; then echo -n " $YELLOW$1$FADED"
+	else echo -n " $BLUE$1"
+	fi
+
+	if [[ "$staged" -ne 0 ]]; then echo -n "$FADED s:$staged"; fi
+	if [[ "$unstaged" -ne 0 ]]; then echo -n "$FADED p:$unstaged"; fi
+	if [[ "$untracked" -ne 0 ]]; then echo -n "$FADED u:$untracked"; fi
+}
+
+git_ahead () {
+	local ahead="$(git branch -v | grep "ahead" | sed -e 's/.*ahead \([0-9]\+\).*/\1/')"
+	if [[ -n "$ahead" ]]; then echo "$WHITE$DELTA_CHAR"; fi
+}
+
+git_info () {
+	local branchName="$(git_branch_name)"
+	if [[ -n "$branchName"  ]]; then
+		local ahead="$(git_ahead)"
+		if [[ -n "$ahead" ]]; then branchName="$branchName $ahead"; fi
+		# It's easier to just pass the branchname, then to fiddle around 
+		echo -n "$(git_dirty "$branchName")"
+	fi
+}
+
+dir_info () {
+	echo -n "$(ls -1 | wc -l | sed 's: ::g')"
+	echo -n " files, "
+	echo -n "$(ls -lah | grep -m 1 total | sed 's/total //')"
+}
+
+bash_prompt_cmd () {
+	# Lets see what I can congure up.
+
+	# Start off with a newline, otherwise things look cluthered.
+	local firstLine="\n$FADED$CORNERDOWN"
+	
+	# Creating user / hostname part
+	firstLine+="(";
+	if [[ ${EUID} == 0 ]]; then
+		firstLine+="${RED}\h";
+	else
+		firstLine+="$WHITE\u $FADED@ $WHITE\h";
+	fi
+
+	# Add workinf directory information.
+	firstLine+="$FADED)$DASH($GREEN \w$FADED"
+
+	# Add potential version controll infomation.
+	firstLine+="$(git_info)"
+
+	# Add number of files and size. (does'n seem particulary useful though.
+	firstLine+=" $FADED| $GREEN$(dir_info)$FADED )"
+
+	# Show the number of stopped jobs, but only if there are any.
+	if [[ -n "$(jobs)" ]]; then firstLine+="$DASH($RED\j jobs$NORMAL$FADED)"; fi
+	
+	local secondLine="\n$FADED$CORNERUP$DASH("
+
+	# Show whether or not the last command was successful.
+	# Just cram the if check for the last exicuted command in the string. I don't think
+	# the $? is gonna play nicely otherwise.
+	secondLine+="\$(if [ \$? = 0 ]; then echo \"$SUCCES\"; else echo \"$ERROR\"; fi)"
+	secondLine+="$NORMAL$FADED)"
+
+	# Adding date and time.
+	secondLine+="$DASH($(date +'%m %h %H:%M:%S'))$DASH> "
+
+	# Resseting colors and such fur user input.
+	export PS1="$firstLine$secondLine${NORMAL}"
+}
+
+
+PROMPT_COMMAND=bash_prompt_cmd

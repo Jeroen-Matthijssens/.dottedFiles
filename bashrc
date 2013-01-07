@@ -9,6 +9,10 @@ if [[ -f ~/.bash_aliases ]]; then
 	. ~/.bash_aliases;
 fi
 
+if [[ -f ~/.dottedFiles/prompt ]]; then
+	. ~/.dottedFiles/prompt;
+fi
+
 complete -cf sudo
 complete -cf man
 complete -cf sh
@@ -24,5 +28,3 @@ export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
 # History settings.
 export HISTCONTROL=ignoredups
 export HISTIGNORE="&:ls:ll:[bf]g:exit:,q:cd"
-
-PS1='[\u@\h \W]\$ '
