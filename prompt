@@ -44,9 +44,11 @@ git_dirty () {
 git_ahead () {
 	local status="$(git branch -v)"
 	# local nr="$(echo "$status" | sed -e 's/.*\(ahead|behind\) \([0-9]\+\).*/\2/')"
+	aheadRegex=" [0-9a-f]{7,40} [ahead [0-9]+\]"
+	behindRegex=" [0-9a-f]{7,40} [behind [0-9]+\]"
 
-	if [[ "$status" =~ "ahead" ]]; then echo -n  "$WHITE$AHEAD_CHAR";
-	elif [[ "$status" =~ "behind" ]]; then echo -n  "$WHITE$BEHIND_CHAR";
+	if [[ "$status" =~ $aheadRegex ]]; then echo -n  "$WHITE$AHEAD_CHAR";
+	elif [[ "$status" =~ $behindRegex ]]; then echo -n  "$WHITE$BEHIND_CHAR";
 	fi
 }
 
