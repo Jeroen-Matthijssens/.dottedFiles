@@ -13,6 +13,11 @@ if [[ -f ~/.dottedFiles/prompt ]]; then
 	. ~/.dottedFiles/prompt;
 fi
 
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+
 complete -cf sudo
 complete -cf man
 complete -cf sh
@@ -26,5 +31,21 @@ export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 # History settings.
+
+# append to the history file, don't overwrite it.
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
 export HISTCONTROL=ignoredups
 export HISTIGNORE="&:ls:ll:[bf]g:exit:,q:cd"
+
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+	. /etc/bash_completion
+fi
