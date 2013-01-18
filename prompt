@@ -6,12 +6,12 @@
 
 # Define color sequences.
 FADED="\[\033[38;5;102m\]"; WHITE="\[\033[38;5;231m\]"
-GREEN="\[\033[38;5;149m\]"; BGREEN="\[\033[1;32m\]"
-RED="\[\033[38;5;196m\]"; BRED="\[\033[1;31m\]"
+GREEN="\[\033[0;32m\]"; BGREEN="\[\033[1;32m\]"
+RED="\[\033[0;31m\]"; BRED="\[\033[1;31m\]"
 
-BLUE="\[\033[38;5;81m\]"
-YELLOW="\[\033[38;5;208m\]"
-RED="\[\033[38;5;196m\]"
+
+BLUE="\[\033[0;34m\]"
+YELLOW="\[\033[0;33m\]"
 
 NORMAL="\[\033[0m\]"
 
@@ -84,7 +84,12 @@ bash_prompt_cmd () {
 	
 	# Creating user / hostname part
 	if [[ ${EUID} == 0 ]]; then firstLine+=" $BRED\h$NORMAL ";
-	else firstLine+=" $WHITE\u $FADED@ $WHITE\h ";
+	else
+
+		$(sudo -n whoami &> /dev/null)
+		if [[ $? -eq 0 ]]; then firstLine+=" $YELLOW\u $FADED@ $YELLOW\h "
+		else firstLine+=" $WHITE\u $FADED@ $WHITE\h ";
+		fi
 	fi
 
 	# Add (potential version contral info and directory information.
