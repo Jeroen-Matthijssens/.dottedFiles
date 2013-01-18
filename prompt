@@ -18,7 +18,7 @@ NORMAL="\[\033[0m\]"
 CORNERDOWN="\342\224\214"; CORNERUP="\342\224\224"; DASH="\342\224\200"
 AHEAD_CHAR="△"
 BEHIND_CHAR="▼"
-NEUTRAL_CHAR="▹"
+NEUTRAL_CHAR="◌"
 DIV_CHAR="◆"
 ERROR="$BRED\342\234\227"; SUCCES="$BGREEN\342\234\223"
 
@@ -39,7 +39,7 @@ git_dirty () {
 	fi
 
 	if [[ "$staged" -ne 0 ]]; then echo -n "$FADED s:$staged"; fi
-	if [[ "$unstaged" -ne 0 ]]; then echo -n "$FADED p:$unstaged"; fi
+	if [[ "$unstaged" -ne 0 ]]; then echo -n "$FADED m:$unstaged"; fi
 	if [[ "$untracked" -ne 0 ]]; then echo -n "$FADED u:$untracked"; fi
 }
 
