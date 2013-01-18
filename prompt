@@ -19,6 +19,7 @@ CORNERDOWN="\342\224\214"; CORNERUP="\342\224\224"; DASH="\342\224\200"
 AHEAD_CHAR="△"
 BEHIND_CHAR="▼"
 NEUTRAL_CHAR="▹"
+DIV_CHAR="◆"
 ERROR="$BRED\342\234\227"; SUCCES="$BGREEN\342\234\223"
 
 git_branch_name () {
@@ -47,9 +48,11 @@ git_ahead () {
 	# local nr="$(echo "$status" | sed -e 's/.*\(ahead|behind\) \([0-9]\+\).*/\2/')"
 	aheadRegex="\* [^\n]* [0-9a-f]{7,40} \[ahead [0-9]+\]"
 	behindRegex="\* [^\n]* [0-9a-f]{7,40} \[behind [0-9]+\]"
+	divergent="\* [^\n]* [0-9a-f]{7,40} \[ahead [0-9]+, behind [0-9]+\]"
 
 	if [[ "$status" =~ $aheadRegex ]]; then echo -n  "$WHITE$AHEAD_CHAR";
 	elif [[ "$status" =~ $behindRegex ]]; then echo -n  "$WHITE$BEHIND_CHAR";
+	elif [[ "$status" =~ $divergent ]]; then echo -n "$RED$DIV_CHAR";
 	else echo -n "$WHITE$NEUTRAL_CHAR";
 	fi
 }
