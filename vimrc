@@ -115,6 +115,7 @@ noremap j m
 " the movements
 noremap r ^
 noremap l $
+noremap f 0
 " noremap <S-r> 0
 noremap <S-r> t
 noremap <S-l> f
