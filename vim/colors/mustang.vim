@@ -36,15 +36,21 @@ let s:background  = "1c1c1c"
 let s:cursor      = "626262"
 
 
-let s:green       = "b1d631"
-let s:orange      = "ff9800"
+" let s:green       = "b1d631"
+" let s:green       = "afd75f"
+let s:green       = "87af5f"
+let s:lightgree   = "afff5f"
+" let s:orange      = "ff9800"
+let s:orange      = "ffaf00"
 let s:yellow      = "e6ea50"
 let s:lightyellow = "faf4c6"
-let s:blue        = "7e8aa2"
+" let s:blue        = "7e8aa2"
+let s:blue        = "5f8787"
 let s:lightred    = "ff835e"
 let s:lightblue   = "00afff"
 let s:lightpurple = "875fff"
 
+echo 
 
 " Vim >= 7.0 specific colors
 if version >= 700
@@ -87,7 +93,8 @@ call SetColor( "Constant",     s:orange,       "",           "none"      )
 call SetColor( "String",       s:green,        "",           "italic"    )
 hi! link Character Constant
 hi! link Number Constant
-hi! link Boolean String
+" hi! link Boolean String
+call SetColor( "Boolean",      s:green,        "",           "bold"      )
 hi! link Float Number
 hi! link StringDelimiter String
 
@@ -105,7 +112,8 @@ hi! link Repeat Statement
 hi! link Label Statement
 hi! link Operator Statement
 call SetColor( "Keyword",      s:orange,       "",           "none"      )
-hi! link Exception Statement
+" hi! link Exception Statement
+call SetColor( "Exception",    s:lightyellow,  "",           "bold"      )
 
 " PreProc
 call SetColor( "PreProc",      s:lightyellow,  "",           "none"      )
@@ -116,10 +124,10 @@ hi! link Macro PreProc
 hi! link PreCondit PreProc
 
 " Type
-call SetColor( "Type",         s:blue,         "",           "none"      )
-hi! link StorageClass Type
-hi! link Structure Type
-hi! link Typedef Type
+call SetColor( "Type",         "7d7d5f",         "",           "none"      )
+hi! link StorageClass Statement
+hi! link Structure Statement
+hi! link Typedef Statement
 
 " Special
 hi! link Special Constant
@@ -127,7 +135,7 @@ hi! link SpecialChar Special
 hi! link Tag Special
 hi! link Delimiter Special
 hi! link SpecialComment Special
-hi! link Debug Special
+hi! link Debug PreProc
 
 " Spell Checking
 call SetColor("SpellBad",      s:lightred,     "",           "bold"      )
@@ -147,18 +155,24 @@ hi! link phpVarSelector Identifier
 hi! link phpBoolean Boolean
 hi! link phpIdentifier Normal
 hi! link phpParent Normal
+hi! link phpDefine Function
 " hi! link 
 
 " Python
 hi! link pythonBuiltin PreFunction
 
 " HTML
+hi! link htmlArg Define
 " hi! link htmlLink helpUnderlined
 hi! link htmlTagName Function
 
 " NERDTree
 hi! link Directory Function
 hi! link NERDTreeExecFile String
+
+" Java
+hi! link javaBraces Normal
+hi! link javaConstant Normal
 
 " "--------------------------------------------------------------------------------------"
 " Fixing issues with non gui versions
