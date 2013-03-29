@@ -3,4 +3,4 @@
 [core]
 	editor = vim
 [alias]
-	ll = "log --oneline --graph --all --decorate"
+	lg = "log --oneline --graph --all --decorate"
