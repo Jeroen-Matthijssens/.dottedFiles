@@ -215,6 +215,10 @@ set listchars=eol:¶,tab:»·,extends:→,precedes:←,trail:ł
 
 " More highlighting for python files
 let python_highlight_all = 1
+let java_highlight_java_lang_ids = 1
+let java_highlight_functions = 1
+let java_comment_strnigs = 1
+let java_highlight_debug = 1
 
 " make .rkt file be highlighted as scheme files.
 au BufNewFile,BufRead *.rkt set filetype=scheme
