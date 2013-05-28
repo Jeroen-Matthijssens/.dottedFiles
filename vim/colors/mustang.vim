@@ -38,14 +38,16 @@ let s:cursor      = "626262"
 
 " let s:green       = "b1d631"
 " let s:green       = "afd75f"
-let s:green       = "87af5f"
-let s:lightgree   = "afff5f"
+" let s:green       = "87af5f"
+let s:green       = "afff5f"
+let s:darkgreen   = "5f875f"
 " let s:orange      = "ff9800"
 let s:orange      = "ffaf00"
 let s:yellow      = "e6ea50"
 let s:lightyellow = "faf4c6"
 " let s:blue        = "7e8aa2"
-let s:blue        = "5f8787"
+let s:blue        = "5fd7d7"
+let s:darkblue    = "5fafaf"
 let s:lightred    = "ff835e"
 let s:lightblue   = "00afff"
 let s:lightpurple = "875fff"
@@ -80,7 +82,7 @@ call SetColor( "StatusLineNC", s:textlight,    s:black,      "italic"    )
 call SetColor( "VertSplit",    s:textlight,    s:black,      ""          )
 
 " General
-call SetColor( "Comment",      s:textlight,    "",           "italic"    )
+call SetColor( "Comment",      s:darkgreen,    "",           "italic"    )
 call SetColor( "SpecialKey",   s:textdull,     "",           "none"      )
 
 call SetColor( "Todo",         s:black,        s:yellow,     "italic"    )
@@ -123,8 +125,12 @@ hi! link Define PreProc
 hi! link Macro PreProc
 hi! link PreCondit PreProc
 
+" lef gutter
+hi! link FoldColumn Normal
+
 " Type
-call SetColor( "Type",         "7d7d5f",         "",           "none"      )
+" call SetColor( "Type",         "7d7d5f",         "",           "none"      )
+call SetColor("Type",         s:darkblue,      "",          "none" )
 hi! link StorageClass Statement
 hi! link Structure Statement
 hi! link Typedef Statement
@@ -165,6 +171,9 @@ hi! link pythonBuiltin PreFunction
 hi! link htmlArg Define
 " hi! link htmlLink helpUnderlined
 hi! link htmlTagName Function
+
+" XML
+hi! link xmlEndTag xmlTagName
 
 " NERDTree
 hi! link Directory Function
