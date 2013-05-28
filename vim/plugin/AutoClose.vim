@@ -57,6 +57,17 @@ function! s:GetNextChar()
     return s:GetCharAhead(1)
 endfunction
 
+function! s:GetNextNonWhiteSpace()
+    let l:index = 1
+    let l:char = s:GetCharAhead(l:index)
+    while l:char != "\0" && l:char == " "
+        let l:index = l:index + 1
+        let l:char = s:GetCharAhead(l:index)
+    endwhile
+    return l:index
+endfunction
+
+
 function! s:GetPrevChar()
     return s:GetCharBehind(1)
 endfunction
@@ -238,6 +249,14 @@ function! s:ClosePair(closer)
     if b:AutoCloseOn && s:GetNextChar() == a:closer
         call s:EraseNCharsAtCursor(1)
         call s:PopBuffer()
+    else 
+        let l:offset = s:GetNextNonWhiteSpace ()
+        let l:char = s:GetCharAhead(l:offset)
+        let l:col = col(".") + l:offset - 1
+        if b:AutoCloseOn && l:offset > 1 && a:closer == l:char
+            exe 'normal '.l:col.'|'
+            call s:EraseNCharsAtCursor (1)
+        endif
     endif
 
     exec "set ve=" . l:save_ve
