@@ -1,5 +1,5 @@
 
-" ""------------------------------------------------------------------------------------" "
+" "------------------------------------------------------------------------------------" "
 " "General settings"
 
 set nocompatible          " don't behave stronlgy vi-compatible. Should be at the top.
@@ -14,7 +14,7 @@ set nowrap                " don't display long langes wrapped.
 set modelines=0           " prevent vim from reading magic comments in files as settings
 set showcmd               " something about autocompleting of commands
 set ttyfast               " Should help improve scolling (more characters are sent)
-set clipboard=unnamed     " Use the global system buffer for proper pasting
+set clipboard=unnamedplus " Use the global system buffer for proper pasting
 set laststatus=2          " Alwas show status line "
 
 " Ignore case for searches Unless you type an uppercase letter, enable incremental
@@ -54,9 +54,9 @@ set mouse=a
 set timeout ttimeoutlen=50
 let c='a'
 while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
+	exec "set <A-".c.">=\e".c
+	exec "imap \e".c." <A-".c.">"
+	let c = nr2char(1+char2nr(c))
 endw
 
 "
@@ -81,13 +81,19 @@ noremap <A-t> <S-l>zt
 " Easier movement between split screens and tabs.
 noremap <C-d> :tabp<cr>
 noremap <C-n> :tabn<cr>
-noremap <S-d> <C-w>h
-noremap <S-h> <C-w>k
-noremap <S-t> <C-w>j
-noremap <S-n> <C-w>l
+noremap jd <C-w>h
+noremap jh <C-w>k
+noremap jt <C-w>j
+noremap jn <C-w>l
 
+noremap <S-j> <nop>
 
-" swap buffers between windows <C-w>x
+noremap <S-j>h <C-W><S-k>
+noremap <S-j>t <C-W><S-j>
+noremap <S-j>d <C-W><S-h>
+noremap <S-j>n <C-W><S-l>
+noremap <S-j><S-t> <C-W><S-t>
+
 
 " make cn and en (dl) work as intended (combinations are not changed by the mappings
 " above.
@@ -102,6 +108,7 @@ noremap <S-s> <S-j>
 
 " since command mode is now on a shifted character, put it on something more accesable
 noremap , :
+noremap : ,
 
 " since d has been remapped to a movement key, use e as 'erase' instead of d as delete.
 noremap e d
@@ -130,7 +137,7 @@ noremap k n
 noremap <S-k> <S-n>
 
 " Stop highlighting search results
-nmap c/ :nohlsearch<CR>
+noremap c/ :nohlsearch<CR>
 
 
 " "General (more logical to me) mappings"
@@ -216,8 +223,8 @@ set listchars=eol:¶,tab:»·,extends:→,precedes:←,trail:ł
 " More highlighting for python files
 let python_highlight_all = 1
 let java_highlight_java_lang_ids = 1
-let java_highlight_functions = 1
-let java_comment_strnigs = 1
+" let java_highlight_functions = 1
+" let java_comment_strings = 1
 let java_highlight_debug = 1
 
 " make .rkt file be highlighted as scheme files.
