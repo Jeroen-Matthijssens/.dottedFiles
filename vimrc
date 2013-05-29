@@ -186,6 +186,15 @@ vnoremap < <gv
 
 
 " "------------------------------------------------------------------------------------" "
+" "Ultisnip options."
+"
+
+let UltiSnipsExpandTrigger="<S-tab>"
+let UltiSnipsJumpForwardTrigger="<S-tab>"
+let UltiSnipsJumpBcakwardTrigger="<C-tab>"
+
+
+" "------------------------------------------------------------------------------------" "
 " "Indetnation options"
 "
 
