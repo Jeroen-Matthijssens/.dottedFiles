@@ -137,7 +137,7 @@ noremap k n
 noremap <S-k> <S-n>
 
 " Stop highlighting search results
-noremap c/ :nohlsearch<CR>
+nnoremap c/ :nohlsearch<CR>
 
 
 " "General (more logical to me) mappings"
