@@ -69,49 +69,55 @@ noremap h k
 noremap t j
 noremap n l
 
+onoremap d h
+onoremap h k
+onoremap t j
+onoremap n l
+
 " make large movements easier. Make it easeir to move the current line around on the
 " screen
-noremap <C-t> <S-l>
-noremap <C-h> <S-h>
-noremap zh zt
-noremap zt zb
-noremap <A-h> <S-h>zb
-noremap <A-t> <S-l>zt
+nnoremap <C-t> <S-l>
+nnoremap <C-h> <S-h>
+nnoremap zh zt
+nnoremap zt zb
+nnoremap <A-h> <S-h>zb
+nnoremap <A-t> <S-l>zt
 
 " Easier movement between split screens and tabs.
-noremap <C-d> :tabp<cr>
-noremap <C-n> :tabn<cr>
-noremap jd <C-w>h
-noremap jh <C-w>k
-noremap jt <C-w>j
-noremap jn <C-w>l
+nnoremap <S-d> :tabp<cr>
+nnoremap <S-n> :tabn<cr>
+nnoremap jd <C-w>h
+nnoremap jh <C-w>k
+nnoremap jt <C-w>j
+nnoremap jn <C-w>l
+nnoremap js <C-W>=
+nnoremap j<S-d> <C-w><C-t>
 
-noremap <S-j> <nop>
+nnoremap <S-j> <nop>
 
-noremap <S-j>h <C-W><S-k>
-noremap <S-j>t <C-W><S-j>
-noremap <S-j>d <C-W><S-h>
-noremap <S-j>n <C-W><S-l>
-noremap <S-j><S-t> <C-W><S-t>
+nnoremap <S-j>h <C-W><S-k>
+nnoremap <S-j>t <C-W><S-j>
+nnoremap <S-j>d <C-W><S-h>
+nnoremap <S-j>n <C-W><S-l>
+nnoremap <S-j><S-t> <C-W><S-t>
 
+" nnoremap <S-h> <S-h>
+nnoremap <S-t> <S-l>
 
-" make cn and en (dl) work as intended (combinations are not changed by the mappings
-" above.
-nnoremap cn cl
-nnoremap en dl
 
 " I never use line undo (<S-u>), so put redo there (instead of the weird <C-r>.
 nnoremap <S-u> <C-r>
 
 " join lines
-noremap <S-s> <S-j>
+nnoremap <S-s> <S-j>
 
 " since command mode is now on a shifted character, put it on something more accesable
-noremap , :
-noremap : ,
+nnoremap , :
+nnoremap : ,
 
 " since d has been remapped to a movement key, use e as 'erase' instead of d as delete.
 noremap e d
+
 " use m as e. m is located between other word movement keys
 noremap m e
 
@@ -133,8 +139,8 @@ noremap <C-l> <S-f>
 
 " There are no more mappings for going to the previous or next find so basically swap
 " the n and k keys
-noremap k n
-noremap <S-k> <S-n>
+nnoremap k n
+nnoremap <S-k> <S-n>
 
 " Stop highlighting search results
 nnoremap c/ :nohlsearch<CR>
@@ -143,8 +149,8 @@ nnoremap c/ :nohlsearch<CR>
 " "General (more logical to me) mappings"
 " remove the x mappings they suck. 'en' or 'cn' feel more natualer and don't take mure
 " time. (I have never hit the x key intentionally ...)
-noremap x <Nop>
-noremap <S-x> <Nop>
+nnoremap x <Nop>
+nnoremap <S-x> <Nop>
 
 " same trick as the jj in qverty, you don't type 'hh' either I hope.
 inoremap hh <esc>
@@ -170,8 +176,8 @@ nnoremap <F5> :TlistToggle<cr>
 let Tlist_Use_Right_Window = 1
 
 " use space to toggle foldings
-vmap <space> zf
-nmap <space> za
+vnoremap <space> zf
+nnoremap <space> za
 
 " Allow pasting without interpeting the input
 set pastetoggle=<F2>
