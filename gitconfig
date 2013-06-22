@@ -2,5 +2,6 @@
 	ui = true
 [core]
 	editor = vim
+	excludesfile = ~/.dottedFiles/gitignore_global
 [alias]
 	lg = "log --oneline --graph --all --decorate"
