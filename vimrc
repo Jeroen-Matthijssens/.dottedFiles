@@ -113,7 +113,9 @@ nnoremap <S-s> <S-j>
 
 " since command mode is now on a shifted character, put it on something more accesable
 nnoremap , :
+vnoremap , :
 nnoremap : ,
+vnoremap : ,
 
 " since d has been remapped to a movement key, use e as 'erase' instead of d as delete.
 noremap e d
