@@ -108,6 +108,9 @@ nnoremap <S-t> <S-l>
 " I never use line undo (<S-u>), so put redo there (instead of the weird <C-r>.
 nnoremap <S-u> <C-r>
 
+" I use cl instead of C, but i do want to clear lines often.
+nnoremap <S-c> cc<esc>
+
 " join lines
 nnoremap <S-s> <S-j>
 
