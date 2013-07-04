@@ -35,13 +35,16 @@ endglobal
 snippet pa "package" b
 package `!p
 parts = os.getcwd ().split ("/") +  path.split ("/")
-try:
-	srcIndex = parts.index ("src")
-	testIndex = parts.index ("test")
-	index = max (srcIndex, testIndex)
-	snip.rv = ".".join (parts[srcIndex+1:-1])
-except ValueError, e:
-	snip.rv = parts[-2]
+
+markers = ["src", "test", "tests"]
+indexes = []
+for marker in markers:
+	try: i = parts.index (marker)
+	except ValueError, e: continue
+	indexes.append (i)
+
+if len (indexes) == 0: snip.rv = parts[-2]
+else: snip.rv = ".".join (parts[max(indexes)+1:-1])
 `;
 endsnippet
 
@@ -74,6 +77,17 @@ public interface `!p getClassName (snip)` {
 }
 endsnippet
 
+snippet enum "interface" b
+/*
+ * enum `!p getClassName (snip)`
+ * @author `git config user.name`
+ * @email `git config user.email`
+ */
+public enum `!p getClassName (snip)` {
+	$0
+}
+endsnippet
+
 snippet main "method (main)" b
 public static void main(String[] args)`!p nl(snip)`{
 	$0
@@ -86,6 +100,13 @@ public ${1:void} ${2:method} ($3) {
 }
 endsnippet
 
+snippet test "make a test method" b
+@Test
+public void $1 () {
+	$0
+}
+endsnippet
+
 snippet pm "private method" b
 private ${1:void} ${2:method} ($3) {
 	$0
@@ -93,7 +114,7 @@ private ${1:void} ${2:method} ($3) {
 endsnippet
 
 snippet for "for" b
-for (${1:int i = 0}; $2; ${3:i+})`!p nl(snip)`{
+for (${1:int i = 0}; $2; ${3:i++})`!p nl(snip)`{
 	$0
 }
 endsnippet
@@ -110,6 +131,3 @@ endsnippet
 snippet co "constant" b
 static public final ${1:String} ${2:var} = $0;
 endsnippet
-
-# vim:ft=snippets:
-
