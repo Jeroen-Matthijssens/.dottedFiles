@@ -26,7 +26,7 @@ let s:white       = "eeeeee"
 let s:black       = "0e0e0e"
 
 let s:textlight   = "666666"
-let s:text        = "cccccc"
+let s:text        = "c6c6c6"
 let s:textdull    = "505050"
 
 let s:bgfold      = "252525"
@@ -35,23 +35,31 @@ let s:background  = "1c1c1c"
 
 let s:cursor      = "626262"
 
+let s:commentColor = "5f5f5f"
+let s:commentTitleColor = "5faf87"
+let s:stringColor  = "afd787"
+let s:specialString = "61d700"
+let s:constantColor = "dadada"
+let s:numberColor = "ff5e00"
+let s:keywordColor = "5f8787"
+let s:controlColor = "ffffaf"
+let s:operatorColor = "ff5e00"
+let s:errorColor   = "d7ffaf"
+let s:whitespaceColor = "3a3a3a"
 
-" let s:green       = "b1d631"
-" let s:green       = "afd75f"
-" let s:green       = "87af5f"
-let s:green       = "afff5f"
-let s:darkgreen   = "5f875f"
-" let s:orange      = "ff9800"
+let s:darkgreen   = "875f87"
 let s:orange      = "ffaf00"
 let s:yellow      = "e6ea50"
 let s:lightyellow = "faf4c6"
-" let s:blue        = "7e8aa2"
-let s:blue        = "5fd7d7"
-let s:darkblue    = "5fafaf"
+let s:blue        = "5f87d7"
+let s:darkblue    = "00ffff"
 let s:lightred    = "ff835e"
 let s:lightblue   = "00afff"
 let s:lightpurple = "875fff"
 
+let s:diffBg    = s:bgfold
+let s:diffBgAdd = "282b28"
+let s:diffBgRm  = "2b2828"
 echo 
 
 " Vim >= 7.0 specific colors
@@ -62,63 +70,65 @@ if version >= 700
 	hi MatchParen   guifg=#d0ffc0 guibg=#2f2f2f gui=bold ctermfg=157 ctermbg=237 cterm=bold
 	hi Pmenu        guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238
 	hi PmenuSel     guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
-	call SetColor( "TabLine",     s:text,     s:textdull,    "" )
+	hi! link PmenuSbar Pmenu
+	hi! link PmenuThumb Pmenu
+	call SetColor( "TabLine",     s:text,      s:textdull,    "" )
 	call SetColor( "TabLineFill", "",          s:textdull,    "" )
-	call SetColor( "TabLineSel",  s:black,     s:green,           "bold"      )
+	call SetColor( "TabLineSel",  s:black,     s:stringColor,           "bold"      )
+	call SetColor( "WildMenu",    s:black,     s:stringColor,           "bold"      )
 endif
 
 " Interface
-call SetColor( "Folded",       s:textlight,    s:bgfold,     ""          )
-call SetColor( "Visual",       "",             s:bgvisual,   "none"      )
-call SetColor( "Cursor",       s:white,        s:cursor,     "underline" )
-call SetColor( "Normal",       s:text,         s:background, ""          )
-call SetColor( "NonText",      s:textdull,     s:bgfold,     ""          )
-call SetColor( "Search",       "",             "",           ""          )
-call SetColor( "LineNr",       s:textlight,    s:black,      ""          )
-call SetColor( "ColorColumn",  "",             s:bgfold,     ""          )
+call SetColor( "Folded",       s:textlight,        s:bgfold,     ""          )
+call SetColor( "Visual",       "",                 s:bgvisual,   "none"      )
+call SetColor( "Cursor",       s:white,            s:cursor,     "underline" )
+call SetColor( "Normal",       s:text,             s:background, ""          )
+call SetColor( "NonText",      s:whitespaceColor,  "",           ""          )
+call SetColor( "Search",       "",                 "",           ""          )
+call SetColor( "LineNr",       s:textlight,        s:black,      ""          )
+hi! link SignColumn LineNr
+call SetColor( "ColorColumn",  "",                 s:bgfold,     ""          )
 
-call SetColor( "StatusLine",   s:white,        s:black,      ""          )
-call SetColor( "StatusLineNC", s:textlight,    s:black,      "italic"    )
-call SetColor( "VertSplit",    s:textlight,    s:black,      ""          )
+call SetColor( "StatusLine",   s:white,            s:black,      ""          )
+call SetColor( "StatusLineNC", s:textlight,        s:black,      "italic"    )
+call SetColor( "VertSplit",    s:textlight,        s:black,      ""          )
 
 " General
-call SetColor( "Comment",      s:darkgreen,    "",           "italic"    )
-call SetColor( "SpecialKey",   s:textdull,     "",           "none"      )
-
+call SetColor( "Comment",      s:commentColor, "",           ""    )
+hi! link SpecialKey NonText
 call SetColor( "Todo",         s:black,        s:yellow,     "italic"    )
 call SetColor( "Title",        s:white,        "",           "bold"      )
-call SetColor( "ErrorMsg",     s:lightred,     s:bgfold,     "bold"      )
+call SetColor( "ErrorMsg",     s:lightred,     s:bgfold,     ""          )
 hi! link Error ErrorMsg
 
 " Constants
-call SetColor( "Constant",     s:orange,       "",           "none"      )
-call SetColor( "String",       s:green,        "",           "italic"    )
+call SetColor( "Constant",     s:constantColor,       "",           "bold"      )
+call SetColor( "String",       s:stringColor,         "",           ""    )
 hi! link Character Constant
-hi! link Number Constant
-" hi! link Boolean String
-call SetColor( "Boolean",      s:green,        "",           "bold"      )
+call SetColor( "Number",       s:numberColor,         "",           "bold" )
+hi! link Boolean Constant
 hi! link Float Number
-hi! link StringDelimiter String
+hi! link StringDelimiter Constant
 
-call SetColor( "Search",       s:yellow,       s:bgvisual,   "bold,underline" )
+call SetColor( "Search",       s:yellow,             s:bgvisual,   "bold,underline" )
+
 " Identifier
-call SetColor( "Identifier",   s:green,        "",           "none"      )
-call SetColor( "Function",     s:white,        "",           "bold"      )
+call SetColor( "Identifier",   s:stringColor,        "",           "none"      )
+call SetColor( "Function",     s:white,              "",           "bold"      )
 hi! link PreFunction PreProc
 
 "Statement
-call SetColor( "Statement",    s:blue,         "",           "none"      )
-hi! link Contitional Statement
-hi! link Conditional Statement
-hi! link Repeat Statement
+call SetColor( "Statement",    s:keywordColor,         "",            "bold"      )
+call SetColor( "Conditional",  s:controlColor,         "",            "bold" )
+hi! link Repeat Conditional
 hi! link Label Statement
-hi! link Operator Statement
-call SetColor( "Keyword",      s:orange,       "",           "none"      )
-" hi! link Exception Statement
-call SetColor( "Exception",    s:lightyellow,  "",           "bold"      )
+" hi! link Operator Conditional
+call SetColor( "Operator",     s:operatorColor,      "",           ""          )
+call SetColor( "Keyword",      s:keywordColor,         "",           "none"      )
+call SetColor( "Exception",    s:errorColor,           "",      "bold"      )
 
 " PreProc
-call SetColor( "PreProc",      s:lightyellow,  "",           "none"      )
+call SetColor( "PreProc",      s:commentTitleColor,  "",           "none"      )
 hi! link PreProc PreProc
 hi! link Include PreProc
 hi! link Define PreProc
@@ -129,18 +139,17 @@ hi! link PreCondit PreProc
 hi! link FoldColumn Normal
 
 " Type
-" call SetColor( "Type",         "7d7d5f",         "",           "none"      )
-call SetColor("Type",         s:darkblue,      "",          "none" )
+hi! link Type Constant
 hi! link StorageClass Statement
-hi! link Structure Statement
-hi! link Typedef Statement
+hi! link Structure Conditional
+hi! link Typedef Constant
 
 " Special
-hi! link Special Constant
-hi! link SpecialChar Special
+call SetColor( "Special",     s:commentTitleColor, "", "" )
+call SetColor( "SpecialChar", s:specialString,     "", "" )
 hi! link Tag Special
 hi! link Delimiter Special
-hi! link SpecialComment Special
+call SetColor( "SpecialComment"  , s:commentTitleColor, "", "bold" )
 hi! link Debug PreProc
 
 " Spell Checking
@@ -149,7 +158,30 @@ call SetColor("SpellCap",      s:lightblue,    "",           "bold"      )
 call SetColor("SpellRare",     s:lightpurple,  "",           "bold"      )
 hi! link SpellLocal SpellBad
 
+" diff colors
+call SetColor("DiffAdd",       "",             s:diffBgAdd,  ""      )
+call SetColor("DiffDelete",    s:black,        s:diffBgRm,   ""      )
+call SetColor("DiffChange",    "",             s:diffBg,     ""      )
+call SetColor("DiffText",      s:yellow,       s:diffBg,     "bold"      )
+if !s:low_color
+	hi DiffAdd ctermbg=233
+	hi DiffDelete ctermbg=233 ctermfg=52
+	hi DiffChange ctermbg=235
+	hi DiffText ctermbg=235
+endif
+call SetColor ( "SignifySignAdd",    s:stringColor,    "", "" )
+call SetColor ( "SignifySignChange", s:controlColor,     "", "" )
+call SetColor ( "SignifySignDelete", s:operatorColor,  "", "" )
+if !s:low_color
+	hi signifySignAdd ctermbg=233
+	hi signifySignChange ctermbg=233
+	hi signifySignDelete ctermbg=233
+endif
 
+" other stuff
+hi! link Question Normal
+hi! link MoreMsg Normal
+hi! link ModeMsg Normal
 
 
 " "--------------------------------------------------------------------------------------"
@@ -172,6 +204,9 @@ hi! link htmlArg Define
 " hi! link htmlLink helpUnderlined
 hi! link htmlTagName Function
 
+" Javascript
+hi! link javaScriptStatement Conditional
+
 " XML
 hi! link xmlEndTag xmlTagName
 
@@ -180,8 +215,15 @@ hi! link Directory Function
 hi! link NERDTreeExecFile String
 
 " Java
-hi! link javaBraces Normal
-hi! link javaConstant Normal
+hi! link javaBraces Conditional
+" hi! link javaConstant Normal
+hi! link javaStatement Conditional
+hi! link javaDebug Normal
+hi! link javaLangObject Normal
+hi! link javaAnnotation Title
+
+" perl
+hi! link perlStatementControl Conditional
 
 " "--------------------------------------------------------------------------------------"
 " Fixing issues with non gui versions
@@ -196,4 +238,3 @@ if !s:low_color
 	hi ColorColumn ctermbg=235
 	hi ErrorMsg ctermbg=235
 endif
-
