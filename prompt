@@ -113,7 +113,7 @@ bash_prompt_cmd () {
 	secondLine+="$NORMAL$FADED)"
 
 	# Adding date and time.
-	secondLine+="$DASH($(date +'%m %h %H:%M:%S'))$DASH> "
+	secondLine+="$DASH($(date +'%d %h %H:%M:%S'))$DASH> "
 
 	# Resseting colors and such fur user input.
 	export PS1="$firstLine$secondLine${NORMAL}"
