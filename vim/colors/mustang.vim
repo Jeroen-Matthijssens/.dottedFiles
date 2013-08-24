@@ -225,6 +225,8 @@ hi! link javaAnnotation Title
 " perl
 hi! link perlStatementControl Conditional
 
+" Git
+hi! link gitcommitSummary Title
 " "--------------------------------------------------------------------------------------"
 " Fixing issues with non gui versions
 
