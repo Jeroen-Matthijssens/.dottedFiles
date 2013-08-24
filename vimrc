@@ -2,29 +2,32 @@
 " "------------------------------------------------------------------------------------" "
 " "General settings"
 
-set nocompatible          " don't behave stronlgy vi-compatible. Should be at the top.
-set hidden                " buffers stay open, dont close when opening a new file.
+set nocompatible          " don't behave strongly vi-compatible. Should be at the top.
+set hidden                " buffers stay open, don't close when opening a new file.
 set backspace=2           " backspace goes over newlines
 set number                " show line numbers
 set scrolloff=10          " Keep cursor away from the top and bottom of the screen
 set wildmode=list:longest " make tab completion behave like a shell
 set textwidth=90          " automatically wrap lines that are longer then 90 characters
 set colorcolumn=+1        " draw a line on textwidth
-set nowrap                " don't display long langes wrapped.
+set nowrap                " don't display long lines wrapped.
 set modelines=0           " prevent vim from reading magic comments in files as settings
 set showcmd               " something about autocompleting of commands
-set ttyfast               " Should help improve scolling (more characters are sent)
+set ttyfast               " Should help improve scrolling (more characters are sent)
 set clipboard=unnamedplus " Use the global system buffer for proper pasting
-set laststatus=2          " Alwas show status line "
+set laststatus=2          " Always show status line "
+set undofile              " Keep undo information after vim session is closed
+set autoread              " automatically read files changes outside of vim?
 execute pathogen#infect("~/.vimplugins/{}")
 
 " Ignore case for searches Unless you type an uppercase letter, enable incremental
-" searching. prepend a \v to every string you search for or you don't have to escape
+" searching. Prepend a \v to every string you search for or you don't have to escape
 " ), | and (.
 set ignorecase
 set smartcase
 set incsearch
 nnoremap / /\v
+vnoremap / /\v
 set hlsearch              " Highlight things that we find with the search
 
 " highlight the remainder of lines longer than 100 characters.
@@ -33,7 +36,8 @@ set hlsearch              " Highlight things that we find with the search
 " Folding settings
 set foldmethod=indent   "manually fold code
 set foldnestmax=10      "deepest fold is 10 levels
-set foldlevel=1
+set foldlevel=99
+set foldlevelstart=99
 
 " Ignore some files when autocompleting file names.
 set wildignore=*.swp,*.pyc,*.class,*.aux,*.toc,*.pdf
@@ -221,6 +225,49 @@ filetype indent on
 set shiftwidth=4
 set tabstop=4
 
+" Signify
+let signify_sign_add               = '✜'
+let signify_sign_change            = '▸'
+let signify_sign_delete            = '✗'
+let signify_sign_delete_first_line = '‾'
+let g:signify_vcs_list = [ 'git', 'svn' ]
+nnoremap <F5> :SignifyToggle<cr>
+
+" NERDTree
+" the standard keymappings don't work properly for me on dvorak
+let NERDTreeMapActivateNode    = "o"
+let NERDTreeMapChangeRoot      = "C"
+let NERDTreeMapChdir           = "cd"
+let NERDTreeMapCloseChildren   = "E"
+let NERDTreeMapCloseDir        = "e"
+let NERDTreeMapDeleteBookmark  = ""
+let NERDTreeMapMenu            = "a"
+let NERDTreeMapHelp            = "?"
+let NERDTreeMapJumpFirstChild  = ""
+let NERDTreeMapJumpLastChild   = ""
+let NERDTreeMapJumpNextSibling = "n"
+let NERDTreeMapJumpParent      = "<S-h>"
+let NERDTreeMapJumpPrevSibling = "d"
+let NERDTreeMapJumpRoot        = "<S-d>"
+let NERDTreeMapOpenExpl        = ""
+let NERDTreeMapOpenInTab       = "<S-t>"
+let NERDTreeMapOpenInTabSilent = ""
+let NERDTreeMapOpenRecursively = "<S-o>"
+let NERDTreeMapOpenSplit       = "<S-n>"
+let NERDTreeMapOpenVSplit      = "<S-s>"
+let NERDTreeMapPreview         = "g" . NERDTreeMapActivateNode
+let NERDTreeMapPreviewSplit    = "g" . NERDTreeMapOpenSplit
+let NERDTreeMapPreviewVSplit   = "g" . NERDTreeMapOpenVSplit
+let NERDTreeMapQuit            = "q"
+let NERDTreeMapRefresh         = "r"
+let NERDTreeMapRefreshRoot     = "R"
+let NERDTreeMapToggleBookmarks = "B"
+let NERDTreeMapToggleFiles     = "F"
+let NERDTreeMapToggleFilters   = "f"
+let NERDTreeMapToggleHidden    = ""
+let NERDTreeMapToggleZoom      = ""
+let NERDTreeMapUpdir           = "u"
+let NERDTreeMapUpdirKeepOpen   = "U"
 
 " "------------------------------------------------------------------------------------" "
 " "File extensions and sintax hilighting."
@@ -237,7 +284,7 @@ else
 	" colorscheme eigen
 endif
 
-" add custom whitespace charactesr and such.
+" add custom whitespace characters and such.
 set list
 set listchars=eol:¶,tab:»·,extends:→,precedes:←,trail:ł
 
@@ -263,7 +310,7 @@ function! Redent( n )
 endfunc
 
 " Show syntax highlighting groups for word under cursor
-nmap <F5> :call SynStack()<CR>
+nnoremap <F8> :call SynStack()<CR>
 function! SynStack()
 	if !exists("*synstack")
 		return
