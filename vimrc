@@ -16,6 +16,7 @@ set showcmd               " something about autocompleting of commands
 set ttyfast               " Should help improve scolling (more characters are sent)
 set clipboard=unnamedplus " Use the global system buffer for proper pasting
 set laststatus=2          " Alwas show status line "
+execute pathogen#infect("~/.vimplugins/{}")
 
 " Ignore case for searches Unless you type an uppercase letter, enable incremental
 " searching. prepend a \v to every string you search for or you don't have to escape
