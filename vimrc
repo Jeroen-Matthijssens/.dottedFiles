@@ -30,9 +30,6 @@ nnoremap / /\v
 vnoremap / /\v
 set hlsearch              " Highlight things that we find with the search
 
-" highlight the remainder of lines longer than 100 characters.
-" match Error /\%>100v/
-
 " Folding settings
 set foldmethod=indent   "manually fold code
 set foldnestmax=10      "deepest fold is 10 levels
@@ -42,11 +39,14 @@ set foldlevelstart=99
 " Ignore some files when autocompleting file names.
 set wildignore=*.swp,*.pyc,*.class,*.aux,*.toc,*.pdf
 
-" Highlight the line the cursor is curently on
-" set cursorline
-
 " Allow interaction throught the mouse
 set mouse=a
+
+" show trailing whitespace
+autocmd BufWinEnter * match Error /\s\+$/
+autocmd InsertEnter * match Error /\s\+\%#\@<!$/
+autocmd InsertLeave * match Error /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 
 " "------------------------------------------------------------------------------------" "
@@ -108,7 +108,6 @@ nnoremap <S-j><S-t> <C-W><S-t>
 
 " nnoremap <S-h> <S-h>
 nnoremap <S-t> <S-l>
-
 
 " I never use line undo (<S-u>), so put redo there (instead of the weird <C-r>.
 nnoremap <S-u> <C-r>
