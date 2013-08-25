@@ -60,7 +60,7 @@ let s:lightpurple = "875fff"
 let s:diffBg    = s:bgfold
 let s:diffBgAdd = "282b28"
 let s:diffBgRm  = "2b2828"
-echo 
+echo
 
 " Vim >= 7.0 specific colors
 if version >= 700
@@ -79,56 +79,56 @@ if version >= 700
 endif
 
 " Interface
-call SetColor( "Folded",       s:textlight,        s:bgfold,     ""          )
-call SetColor( "Visual",       "",                 s:bgvisual,   "none"      )
-call SetColor( "Cursor",       s:white,            s:cursor,     "underline" )
-call SetColor( "Normal",       s:text,             s:background, ""          )
-call SetColor( "NonText",      s:whitespaceColor,  "",           ""          )
-call SetColor( "Search",       "",                 "",           ""          )
-call SetColor( "LineNr",       s:textlight,        s:black,      ""          )
+call SetColor( "Folded",             s:textlight,         s:bgfold,     ""          )
+call SetColor( "Visual",             "",                  s:bgvisual,   "none"      )
+call SetColor( "Cursor",             s:white,             s:cursor,     "underline" )
+call SetColor( "Normal",             s:text,              s:background, ""          )
+call SetColor( "NonText",            s:whitespaceColor,   "",           ""          )
+call SetColor( "Search",             "",                  "",           ""          )
+call SetColor( "LineNr",             s:textlight,         s:black,      ""          )
 hi! link SignColumn LineNr
-call SetColor( "ColorColumn",  "",                 s:bgfold,     ""          )
+call SetColor( "ColorColumn",        "",                  s:bgfold,     ""          )
 
-call SetColor( "StatusLine",   s:white,            s:black,      ""          )
-call SetColor( "StatusLineNC", s:textlight,        s:black,      "italic"    )
-call SetColor( "VertSplit",    s:textlight,        s:black,      ""          )
+call SetColor( "StatusLine",         s:white,             s:black,      ""          )
+call SetColor( "StatusLineNC",       s:textlight,         s:black,      "italic"    )
+call SetColor( "VertSplit",          s:textlight,         s:black,      ""          )
 
 " General
-call SetColor( "Comment",      s:commentColor, "",           ""    )
+call SetColor( "Comment",            s:commentColor,      "",           ""          )
 hi! link SpecialKey NonText
-call SetColor( "Todo",         s:black,        s:yellow,     "italic"    )
-call SetColor( "Title",        s:white,        "",           "bold"      )
-call SetColor( "ErrorMsg",     s:lightred,     s:bgfold,     ""          )
+call SetColor( "Todo",               s:black,             s:yellow,     "italic"    )
+call SetColor( "Title",              s:white,             "",           "bold"      )
+call SetColor( "ErrorMsg",           s:lightred,          s:bgfold,     ""          )
 hi! link Error ErrorMsg
 
 " Constants
-call SetColor( "Constant",     s:constantColor,       "",           "bold"      )
-call SetColor( "String",       s:stringColor,         "",           ""    )
+call SetColor( "Constant",           s:constantColor,     "",           "bold"      )
+call SetColor( "String",             s:stringColor,       "",           ""          )
 hi! link Character Constant
-call SetColor( "Number",       s:numberColor,         "",           "bold" )
+call SetColor( "Number",             s:numberColor,       "",           "bold"      )
 hi! link Boolean Constant
 hi! link Float Number
 hi! link StringDelimiter Constant
 
-call SetColor( "Search",       s:yellow,             s:bgvisual,   "bold,underline" )
+call SetColor( "Search",             s:yellow,            s:bgvisual,   "bold,underline" )
 
 " Identifier
-call SetColor( "Identifier",   s:stringColor,        "",           "none"      )
-call SetColor( "Function",     s:white,              "",           "bold"      )
+call SetColor( "Identifier",         s:stringColor,       "",           "none"      )
+call SetColor( "Function",           s:white,             "",           "bold"      )
 hi! link PreFunction PreProc
 
 "Statement
-call SetColor( "Statement",    s:keywordColor,         "",            "bold"      )
-call SetColor( "Conditional",  s:controlColor,         "",            "bold" )
+call SetColor( "Statement",          s:keywordColor,      "",           "bold"      )
+call SetColor( "Conditional",        s:controlColor,      "",           "bold"      )
 hi! link Repeat Conditional
 hi! link Label Statement
 " hi! link Operator Conditional
-call SetColor( "Operator",     s:operatorColor,      "",           ""          )
-call SetColor( "Keyword",      s:keywordColor,         "",           "none"      )
-call SetColor( "Exception",    s:errorColor,           "",      "bold"      )
+call SetColor( "Operator",           s:operatorColor,     "",           ""          )
+call SetColor( "Keyword",            s:keywordColor,      "",           "none"      )
+call SetColor( "Exception",          s:errorColor,        "",           "bold"      )
 
 " PreProc
-call SetColor( "PreProc",      s:commentTitleColor,  "",           "none"      )
+call SetColor( "PreProc",            s:commentTitleColor, "",           "none"      )
 hi! link PreProc PreProc
 hi! link Include PreProc
 hi! link Define PreProc
@@ -145,33 +145,33 @@ hi! link Structure Conditional
 hi! link Typedef Constant
 
 " Special
-call SetColor( "Special",     s:commentTitleColor, "", "" )
-call SetColor( "SpecialChar", s:specialString,     "", "" )
+call SetColor( "Special",            s:commentTitleColor, "",           ""          )
+call SetColor( "SpecialChar",        s:specialString,     "",           ""          )
 hi! link Tag Special
 hi! link Delimiter Special
-call SetColor( "SpecialComment"  , s:commentTitleColor, "", "bold" )
+call SetColor( "SpecialComment",     s:commentTitleColor, "",           "bold"      )
 hi! link Debug PreProc
 
 " Spell Checking
-call SetColor("SpellBad",      s:lightred,     "",           "bold"      )
-call SetColor("SpellCap",      s:lightblue,    "",           "bold"      )
-call SetColor("SpellRare",     s:lightpurple,  "",           "bold"      )
+call SetColor("SpellBad",            s:lightred,          "",           "bold"      )
+call SetColor("SpellCap",            s:lightblue,         "",           "bold"      )
+call SetColor("SpellRare",           s:lightpurple,       "",           "bold"      )
 hi! link SpellLocal SpellBad
 
 " diff colors
-call SetColor("DiffAdd",       "",             s:diffBgAdd,  ""      )
-call SetColor("DiffDelete",    s:black,        s:diffBgRm,   ""      )
-call SetColor("DiffChange",    "",             s:diffBg,     ""      )
-call SetColor("DiffText",      s:yellow,       s:diffBg,     "bold"      )
+call SetColor("DiffAdd",             "",                  s:diffBgAdd,  ""          )
+call SetColor("DiffDelete",          s:black,             s:diffBgRm,   ""          )
+call SetColor("DiffChange",          "",                  s:diffBg,     ""          )
+call SetColor("DiffText",            s:yellow,            s:diffBg,     "bold"      )
 if !s:low_color
 	hi DiffAdd ctermbg=233
 	hi DiffDelete ctermbg=233 ctermfg=52
 	hi DiffChange ctermbg=235
 	hi DiffText ctermbg=235
 endif
-call SetColor ( "SignifySignAdd",    s:stringColor,    "", "" )
-call SetColor ( "SignifySignChange", s:controlColor,     "", "" )
-call SetColor ( "SignifySignDelete", s:operatorColor,  "", "" )
+call SetColor ( "SignifySignAdd",    s:stringColor,       "",           ""          )
+call SetColor ( "SignifySignChange", s:controlColor,      "",           ""          )
+call SetColor ( "SignifySignDelete", s:operatorColor,     "",           ""          )
 if !s:low_color
 	hi signifySignAdd ctermbg=233
 	hi signifySignChange ctermbg=233
@@ -194,7 +194,7 @@ hi! link phpBoolean Boolean
 hi! link phpIdentifier Normal
 hi! link phpParent Normal
 hi! link phpDefine Function
-" hi! link 
+" hi! link
 
 " Python
 hi! link pythonBuiltin PreFunction
