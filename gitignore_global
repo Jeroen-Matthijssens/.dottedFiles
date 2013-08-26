@@ -1,5 +1,50 @@
-.*.swp
-*~
+# Compiled source #
+*.com
 *.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+# Packages #
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.bz2
+*.bzip
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
+
+# vim generated files #
+*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# Netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# skip hidden files by default, except .gitignore
+.*
+!.gitignore
+
+# svn
 .svn
-.gitignore
