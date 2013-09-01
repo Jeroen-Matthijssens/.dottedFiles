@@ -84,7 +84,7 @@ jobs_info () {
 bash_prompt_cmd () {
 	# Start off with a newline, otherwise things look cluthered.
 	local firstLine="\n$FADED$CORNERDOWN("
-	
+
 	# Creating user / hostname part
 	if [[ ${EUID} == 0 ]]; then firstLine+=" $BRED\h$NORMAL ";
 	else
