@@ -27,7 +27,7 @@ git_branch_name () {
 }
 
 git_dirty () {
-	local status="$(git status --porcelain)"
+	local status="$(git status --porcelain 2> /dev/null)"
 
 	local staged="$(echo "$status" | grep -c ^\[^\ ?\])"
 	local untracked="$(echo "$status" | grep -c \^??)"
