@@ -70,7 +70,7 @@ git_info () {
 dir_info () {
 	echo -n "$(ls -1 | wc -l | sed 's: ::g')"
 	echo -n " files, "
-	echo -n "$(ls -lah | grep -m 1 total | sed 's/total //')"
+	echo -n "$(ls -lah 2> /dev/null | grep -m 1 total | sed 's/total //')"
 }
 
 jobs_info () {
