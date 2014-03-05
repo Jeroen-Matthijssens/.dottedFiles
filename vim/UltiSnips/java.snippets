@@ -48,17 +48,13 @@ else: snip.rv = ".".join (parts[max(indexes)+1:-1])
 `;
 endsnippet
 
+snippet logger "create static logger" b
+public static final Logger logger = LoggerFactory.getLogger (`!p getClassName (snip)`.class);
+endsnippet
+
 snippet class "class" b
-/*
- * class `!p getClassName (snip)`
- * @author `git config user.name`
- * @email `git config user.email`
- */
 public class `!p getClassName (snip)` {
 `!p setAttributes (snip, t[1])`
-	/*
-	 * Constructor for `!p getClassName (snip)`
-	 */
 	public `!p getClassName (snip)` ($1) {$2}
 `!p getGettersAndSetters (snip, t[1])`
 	$0
@@ -66,8 +62,35 @@ public class `!p getClassName (snip)` {
 }
 endsnippet
 
+snippet test "Test class" b
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeThat;
+
+import org.junit.Test;
+import org.junit.Before;
+
+/**
+ * class `!p getClassName (snip)`
+ * @author `git config user.name`
+ * @email `git config user.email`
+ */
+public class `!p getClassName (snip)` {
+
+	@Before
+	public void setup () {
+	}
+
+	@Test
+	public void it_should () {
+		$0
+	}
+
+}
+endsnippet
+
 snippet interface "interface" b
-/*
+/**
  * interface `!p getClassName (snip)`
  * @author `git config user.name`
  * @email `git config user.email`
@@ -77,7 +100,7 @@ public interface `!p getClassName (snip)` {
 }
 endsnippet
 
-snippet enum "interface" b
+snippet enum "enumration" b
 /*
  * enum `!p getClassName (snip)`
  * @author `git config user.name`
@@ -100,7 +123,7 @@ public ${1:void} ${2:method} ($3) {
 }
 endsnippet
 
-snippet test "make a test method" b
+snippet testcase "make a test method" b
 @Test
 public void $1 () {
 	$0
