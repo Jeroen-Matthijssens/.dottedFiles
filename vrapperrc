@@ -1,0 +1,81 @@
+inoremap hh <esc>
+
+noremap d h
+noremap h k
+noremap t j
+noremap n l
+
+noremap l $
+noremap f 0
+noremap r ^
+
+noremap e d
+noremap ee dd
+noremap el d$
+noremap er d^
+noremap ed dh
+noremap eh dk
+noremap et dj
+noremap en dl
+noremap e<S-r> dt
+noremap e<S-l> df
+noremap e<C-r> d<S-t>
+noremap e<C-l> d<S-f>
+vnoremap e d<cr>k
+
+noremap ce cd
+noremap cl c$
+noremap cr c^
+noremap cd ch
+noremap ch ck
+noremap ct cj
+noremap cn cl
+noremap c<S-r> ct
+noremap c<S-l> cf
+noremap c<C-r> c<S-t>
+noremap c<C-l> c<S-f>
+
+nnoremap jd <C-w>h
+nnoremap jh <C-w>k
+nnoremap jt <C-w>j
+nnoremap jn <C-w>l
+nnoremap js <C-W>=
+nnoremap <S-d> :tabp<cr>
+nnoremap <S-n> :tabn<cr>
+
+nnoremap <C-t> <S-l>
+nnoremap <C-h> <S-h>
+nnoremap zh zt
+nnoremap zt zb
+nnoremap <A-h> <S-h>zb
+nnoremap <A-t> <S-l>zt
+
+" nnoremap <S-t> <S-l>
+" nnoremap <S-u> <C-r>
+
+nnoremap <S-c> cc<esc>
+nnoremap <S-s> <S-j>
+nnoremap , :
+vnoremap , :
+nnoremap : ,
+vnoremap : ,
+noremap m e
+noremap ' "
+noremap " '
+noremap <S-r> t
+noremap <S-l> f
+noremap <C-r> <S-t>
+noremap <C-l> <S-f>
+nnoremap k n
+nnoremap <S-k> <S-n>
+nnoremap c/ :nohlsearch<CR>
+nnoremap x <Nop>
+nnoremap <S-x> <Nop>
+nnoremap + <C-a>
+nnoremap - <C-x>
+vnoremap <space> zf
+nnoremap <space> za
+nnoremap <gt> <gt><gt>
+nnoremap <lt> <lt><lt>
+vnoremap <gt> <gt>gv
+vnoremap <lt> <lt>gv
