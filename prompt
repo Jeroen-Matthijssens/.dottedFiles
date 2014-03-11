@@ -76,8 +76,8 @@ dir_info () {
 jobs_info () {
 	local nrOfJobs="$(jobs | wc -l)"
 
-	if [[ "$nrOfJobs" > 1 ]]; then echo -n "$RED\j jobs";
-	elif [[ "$nrOfJobs" == 1 ]]; then echo -n "$RED\j job"
+	if [[ "$nrOfJobs" -gt 1 ]]; then echo -n "$RED\j jobs";
+	elif [[ "$nrOfJobs" -eq 1 ]]; then echo -n "$RED\j job"
 	fi
 }
 

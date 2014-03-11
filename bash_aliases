@@ -1,5 +1,5 @@
-alias ls='ls --color=auto'
-alias ll="ls -lhtF --group-directories-first"
+alias ls="ls -G"
+alias ll="ls -lhtF"
 alias youtube-dl="youtube-dl -t -c"
 alias ,q="exit"
 alias tree="tree -CF"

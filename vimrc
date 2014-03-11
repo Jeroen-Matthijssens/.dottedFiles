@@ -210,7 +210,7 @@ let UltiSnipsJumpBcakwardTrigger="<C-tab>"
 
 
 " "------------------------------------------------------------------------------------" "
-" "Indetnation options"
+" "Indentation options"
 "
 
 set autoindent
