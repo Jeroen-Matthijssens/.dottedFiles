@@ -169,9 +169,9 @@ if !s:low_color
 	hi DiffChange ctermbg=235
 	hi DiffText ctermbg=235
 endif
-call SetColor ( "SignifySignAdd",    s:stringColor,       s:black,      ""          )
-call SetColor ( "SignifySignChange", s:controlColor,      s:black,      ""          )
-call SetColor ( "SignifySignDelete", s:operatorColor,     s:black,      ""          )
+call SetColor ( "SignifySignAdd",    "afd787",            s:black,      ""          )
+call SetColor ( "SignifySignChange", "ffffaf",            s:black,      ""          )
+call SetColor ( "SignifySignDelete", "ff5e00",            s:black,      ""          )
 if !s:low_color
 	hi signifySignAdd ctermbg=233
 	hi signifySignChange ctermbg=233
