@@ -35,11 +35,16 @@ let s:background  = "1c1c1c"
 
 let s:cursor      = "626262"
 
-let s:commentColor = "5f5f5f"
+let s:commentColor = "bbd870"
+" let s:commentColor = "b7f891"
+" let s:commentColor = "5faf87"
+" let s:commentColor = "5f5f5f"
+" let s:commentColor = "def5cf"
 let s:commentTitleColor = "5faf87"
 let s:stringColor  = "afd787"
 
-let s:mono = "def5cf"
+" let s:mono = "def5cf"
+let s:mono = "bee5af"
 let s:offset = "fff4d2"
 
 let s:controlColor = s:mono
