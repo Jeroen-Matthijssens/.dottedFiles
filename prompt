@@ -5,9 +5,9 @@
 # - counting of files will not work when there are merge conflicts.
 
 # Define color sequences.
-FADED="\[\033[38;5;102m\]"; WHITE="\[\033[38;5;231m\]"
-GREEN="\[\033[0;32m\]"; BGREEN="\[\033[1;32m\]"
-RED="\[\033[0;31m\]"; BRED="\[\033[1;31m\]"
+FADED="\[\033[38;5;102m\]"; WHITE="\[\033[0m\]"
+GREEN="\[\033[0;32m\]"; BGREEN=${GREEN}
+RED="\[\033[0;31m\]"; BRED=${RED}
 
 
 BLUE="\[\033[0;34m\]"
