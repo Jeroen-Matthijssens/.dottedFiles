@@ -14,7 +14,7 @@ set nowrap                " don't display long lines wrapped.
 set modelines=0           " prevent vim from reading magic comments in files as settings
 set showcmd               " something about autocompleting of commands
 set ttyfast               " Should help improve scrolling (more characters are sent)
-set clipboard=unnamedplus " Use the global system buffer for proper pasting
+" set clipboard=unnamedplus " Use the global system buffer for proper pasting
 set laststatus=2          " Always show status line "
 set undofile              " Keep undo information after vim session is closed
 set autoread              " automatically read files changes outside of vim?
@@ -132,8 +132,8 @@ noremap m e
 
 " I will probably use registers more often then marks. so swap ' and " (same key on
 " dvorak).
-noremap ' "
-noremap " '
+noremap " m
+noremap _ "
 
 " use r and l to move to the first asd last character of a line. 'l' was a movement key
 " anyway, and I never use replace (r) directly. Instead i tend to use 'c' together with
@@ -167,9 +167,9 @@ inoremap hh <esc>
 let mapleader = ";"
 
 " Easier creation of split windows and tabs
-nnoremap <leader>s :vs 
-nnoremap <leader>n :sp 
-nnoremap <leader>t :tabe 
+nnoremap <leader>s :vs
+nnoremap <leader>n :sp
+nnoremap <leader>t :tabe
 " allow easy resourcing of .vimrc
 nnoremap <leader>l :source $MYVIMRC<cr>
 " Easier increment and decrement of numbers.
@@ -276,7 +276,7 @@ set t_Co=256       " enable more colors, terminal supports them anyway"
 syntax on          " enable sintax highlighting
 if &t_Co >= 256 || has("gui_running")
 	" kind of a useless check, but set fancier color scheme
-	colorscheme mustang
+	colorscheme simple
 else
 	" set basic color scheme
 	" does not exist anymore
