@@ -52,9 +52,3 @@ export HISTIGNORE="&:ls:ll:[bf]g:exit:,q:cd"
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 	. /etc/bash_completion
 fi
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-export PATH=$PATH:/Users/jeroen/Apps/Senchaa/Cmd/4.0.2.67/
-
-export SENCHA_CMD_3_0_0="/Users/jeroen/Apps/Sencha/Sencha/Cmd/4.0.2.67"
