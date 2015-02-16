@@ -4,4 +4,4 @@
 	editor = vim
 	excludesfile = ~/.dottedFiles/gitignore_global
 [alias]
-	lg = "log --oneline --graph --all --decorate"
+	lg = "log --oneline --graph --all --decorate -n 30"
