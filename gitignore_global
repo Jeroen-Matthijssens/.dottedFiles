@@ -43,9 +43,16 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# intelij
+*.iml
+.idea/
+
+# build systems
+.gradle
+
 # skip hidden files by default, except .gitignore
-.*
-!.gitignore
+# .*
+# !.gitignore
 
 # svn
 .svn
