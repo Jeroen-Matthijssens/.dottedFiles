@@ -33,15 +33,10 @@ Session.vim
 .netrwhist
 *~
 
-# Netbeans
-nbproject/private/
+# build directories
 build/
 target/
-nbbuild/
 dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
 
 # intelij
 *.iml
@@ -49,10 +44,16 @@ nb-configuration.xml
 
 # build systems
 .gradle
+node_modules/
 
 # skip hidden files by default, except .gitignore
-# .*
-# !.gitignore
+.*
+!.gitignore
 
 # svn
 .svn
+
+# property, config and private files
+*.properties
+!*.example.properties
+*.jks
