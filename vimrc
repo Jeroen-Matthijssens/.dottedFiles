@@ -319,3 +319,5 @@ function! SynStack()
 	endif
 	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+let g:python_recommended_style = 0
