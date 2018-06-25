@@ -2,6 +2,9 @@
 " "------------------------------------------------------------------------------------" "
 " "General settings"
 
+set directory=$HOME/.vim/swps//
+set backupdir=$HOME/.vim/bcks//
+set undodir=$HOME/.vim/undo//
 set nocompatible          " don't behave strongly vi-compatible. Should be at the top.
 set hidden                " buffers stay open, don't close when opening a new file.
 set backspace=2           " backspace goes over newlines
