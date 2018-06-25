@@ -4,4 +4,27 @@
 	editor = vim
 	excludesfile = ~/.dottedFiles/gitignore_global
 [alias]
-	lg = "log --oneline --graph --all --decorate -n 30"
+	lg = "log -n 30 --pretty=format:'%C(yellow)%h%C(reset)%C(red)%d %C(reset)%s %C(blue)[%ad, %an]%C(reset)' --graph --date=short"
+	ll = "log --oneline --graph --decorate -n 30"
+	top = "rev-parse --show-toplevel"
+	last = "log --decorate --numstat -n 1"
+	save = "!git add -A && git commit -m 'SAVEPOINT'"
+	wipe = "!git add -A && git commit -m 'WIPE SAVEPOINT' && git reset HEAD~1 --hard"
+	fixup = "commit --amend --no-edit"
+	dirties = "!f () { \
+		for dir in $(find . -type d -maxdepth 1); do ( \
+			if ! [ -d ${dir}/.git ]; then \
+				continue; \
+			fi; \
+			cd ${dir}; \
+			count=$(git status --porcelain | wc -l); \
+			if [ ${count} -eq 0 ]; then \
+				continue; \
+			fi; \
+			echo; \
+			echo \"> (${count}) ${dir}\"; \
+			git status -s; \
+		) done \
+	}; f"
+[fetch]
+	prune = true
