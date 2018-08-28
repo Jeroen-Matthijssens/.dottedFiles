@@ -20,7 +20,7 @@ let colors_name = "mustang"
 
 " import the <code>SetColor</code> function
 " <code>SetColor( groupName, foreground, background, attributes)</code>
-source ~/.vim/colors/calcTermColors.vim
+runtime /colors/calcTermColors.vim
 
 let s:white       = "eeeeee"
 let s:black       = "0e0e0e"
