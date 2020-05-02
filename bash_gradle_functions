@@ -1,0 +1,52 @@
+if [ -n "$(which gradle)" ]; then
+	function gradle-wrapper-setup () {
+		local build_file="${1:-wrapper.gradle}";
+		local bck_dir="$(mktemp -d ".gradlew-setup-XXXX")";
+
+		if [ ! -f "${build_file}" ]; then
+			build_file="build.gradle"
+		fi
+
+		if [ -f "settings.gradle" ];then
+			mv "settings.gradle" "${bck_dir}/.";
+		fi
+		if [ -f "build.gradle" ] && ! [ "${build_file}" = "build.gradle" ]; then
+			mv "build.gradle" "${bck_dir}/.";
+		fi
+		if [ -f "${build_file}" ] && ! [ "${build_file}" = "build.gradle" ]; then
+			cp "${build_file}" "build.gradle";
+		fi
+
+		$(which gradle) wrapper
+		local code=$?
+
+		mv "${bck_dir}/"* .;
+		rmdir "${bck_dir}";
+
+		return ${code};
+	}
+
+	function gradle-ext () {
+		if [ "${1}" == '--native' ]; then
+			shift;
+			$(which gradle) "$@";
+			return $?;
+		fi
+
+		if [ "${1}" == 'wrapper' ]; then
+			shift;
+			gradle-wrapper-setup "$@";
+			return $?;
+		fi
+
+		if [ -f ./gradlew ]; then
+			./gradlew "$@";
+			return $?;
+		fi
+
+		$(which gradle) "$@";
+		return $?;
+	}
+
+	alias gradle=gradle-ext
+fi

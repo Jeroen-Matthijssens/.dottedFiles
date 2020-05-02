@@ -55,3 +55,8 @@ node_modules/
 *.properties
 !*.example.properties
 *.jks
+
+gradlew
+gradlew.bat
+
+out/
