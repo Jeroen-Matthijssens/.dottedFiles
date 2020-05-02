@@ -6,21 +6,21 @@
 
 # Define color sequences.
 FADED="\[\033[38;5;102m\]"; WHITE="\[\033[0m\]"
-GREEN="\[\033[0;32m\]"; BGREEN=${GREEN}
-RED="\[\033[0;31m\]"; BRED=${RED}
-
-
+RED="\[\033[0;31m\]"
 BLUE="\[\033[0;34m\]"
+MAGENTA="\[\033[38;5;5m\]"
 YELLOW="\[\033[0;33m\]"
 
 NORMAL="\[\033[0m\]"
 
-CORNERDOWN="\342\224\214"; CORNERUP="\342\224\224"; DASH="\342\224\200"
 AHEAD_CHAR="△"
 BEHIND_CHAR="▼"
 NEUTRAL_CHAR="◌"
 DIV_CHAR="◆"
-ERROR="$BRED\342\234\227"; SUCCES="$BGREEN\342\234\223"
+ERROR="$RED\342\234\227"; SUCCES="$BGREEN\342\234\223"
+JOBS_CHAR="⟁"
+
+TRI_CLOSE="⮀"
 
 git_branch_name () {
 	echo "$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
@@ -33,9 +33,9 @@ git_dirty () {
 	local untracked="$(echo "$status" | grep -c \^??)"
 	local unstaged="$(echo "$status" | grep -c \^\ )"
 
-	if [[ "$unstaged" -ne 0 ]]; then echo -n " $RED$1$FADED"
-	elif [[ "$staged" -ne 0 ]]; then echo -n " $YELLOW$1$FADED"
-	else echo -n " $BLUE$1"
+	if [[ "$unstaged" -ne 0 ]]; then echo -n "$RED$1$FADED"
+	elif [[ "$staged" -ne 0 ]]; then echo -n "$YELLOW$1$FADED"
+	else echo -n "$BLUE$1"
 	fi
 
 	if [[ "$staged" -ne 0 ]]; then echo -n "$FADED s:$staged"; fi
@@ -45,10 +45,9 @@ git_dirty () {
 
 git_ahead () {
 	local status="$(git branch -v)"
-	# local nr="$(echo "$status" | sed -e 's/.*\(ahead|behind\) \([0-9]\+\).*/\2/')"
-	aheadRegex="\* [^\n]* [0-9a-f]{7,40} \[ahead [0-9]+\]"
-	behindRegex="\* [^\n]* [0-9a-f]{7,40} \[behind [0-9]+\]"
-	divergent="\* [^\n]* [0-9a-f]{7,40} \[ahead [0-9]+, behind [0-9]+\]"
+	aheadRegex="\* [-/_A-Za-z0-9+.]* *[0-9a-f]{7,40} \[ahead [0-9]+\]"
+	behindRegex="\* [-/_A-Za-z0-9+.]* *[0-9a-f]{7,40} \[behind [0-9]+\]"
+	divergent="\* [-/_A-Za-z0-9+.]* *[0-9a-f]{7,40} \[ahead [0-9]+, behind [0-9]+\]"
 
 	if [[ "$status" =~ $aheadRegex ]]; then echo -n  "$WHITE$AHEAD_CHAR";
 	elif [[ "$status" =~ $behindRegex ]]; then echo -n  "$WHITE$BEHIND_CHAR";
@@ -62,60 +61,61 @@ git_info () {
 	if [[ -n "$branchName"  ]]; then
 		local ahead="$(git_ahead)"
 		if [[ -n "$ahead" ]]; then branchName="$branchName $ahead"; fi
-		# It's easier to just pass the branchname, then to fiddle around 
-		echo -n "$(git_dirty "$branchName")"
+		echo -n "( $(git_dirty "$branchName")$NORMAL )"
 	fi
-}
-
-dir_info () {
-	echo -n "$(ls -1 | wc -l | sed 's: ::g')"
-	echo -n " files, "
-	echo -n "$(ls -lah 2> /dev/null | grep -m 1 total | sed 's/total //')"
 }
 
 jobs_info () {
 	local nrOfJobs="$(jobs | wc -l)"
+	echo -n "$YELLOW\j $JOBS_CHAR$NORMAL"
+}
 
-	if [[ "$nrOfJobs" -gt 1 ]]; then echo -n "$RED\j jobs";
-	elif [[ "$nrOfJobs" -eq 1 ]]; then echo -n "$RED\j job"
+truncated_dir () {
+	local dir="${PWD#${HOME}}";
+	local length=${#dir}
+
+	[ "${PWD}" != "${dir}" ] && printf "~";
+
+	if (( ${length} < 75 )); then
+		printf "${dir}";
+	else
+		IFS=/;
+
+		local index=0;
+
+		for q in ${dir:1}; do
+			length=$(( ${length} - ${#q} + 1 ))
+			index=$(( ${index} + ${#q} + 1 ))
+			printf /${q:0:1};
+			if (( length < 75 )); then break; fi
+		done;
+
+		printf "${dir:${index}}";
 	fi
 }
 
 bash_prompt_cmd () {
 	# Start off with a newline, otherwise things look cluthered.
-	local firstLine="\n$FADED$CORNERDOWN("
-
-	# Creating user / hostname part
-	if [[ ${EUID} == 0 ]]; then firstLine+=" $BRED\h$NORMAL ";
-	else
-		if [[ $(sudo -n whoami 2> /dev/null) =~ 'root' ]]; then
-			firstLine+=" $YELLOW\u $FADED@ $YELLOW\h "
-		elif [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-			firstLine+=" $BLUE\u $FADED@ $BLUE \h ";
-		else
-			firstLine+=" $WHITE\u $FADED@ $WHITE\h ";
-		fi
-	fi
-
-	# Add (potential version contral info and directory information.
-	firstLine+="$FADED)$DASH($(git_info) $GREEN\w$FADED"
-
-	# Add number of files and size. (does'n seem particulary useful though.
-	firstLine+=" $FADED| $WHITE$(dir_info)$FADED )"
+	local firstLine="\n$MAGENTA$TRI_CLOSE$NORMAL "
 
 	# Show the number of stopped jobs, but only if there are any.
-	if [[ -n "$(jobs)" ]]; then firstLine+="$DASH( $(jobs_info) $FADED)"; fi
+	if [[ -n "$(jobs)" ]]; then firstLine+="( $(jobs_info) ) "; fi
 
-	local secondLine="\n$FADED$CORNERUP$DASH("
+	# Add (potential version contral info.
+	firstLine+="$(git_info) $MAGENTA$(truncated_dir)$NORMAL"
 
-	# Show whether or not the last command was successful.
-	# Just cram the if check for the last exicuted command in the string. I don't think
-	# the $? is gonna play nicely otherwise.
-	secondLine+="\$(if [ \$? = 0 ]; then echo \"$SUCCES\"; else echo \"$ERROR\"; fi)"
-	secondLine+="$NORMAL$FADED)"
+	local secondLine="\n"
 
-	# Adding date and time.
-	secondLine+="$DASH($(date +'%d %h %H:%M:%S'))$DASH> "
+	if [[ ${EUID} == 0 ]]; then secondLine+="$RED#$NORMAL ";
+	else
+		if [[ $(sudo -n whoami 2> /dev/null) =~ 'root' ]]; then
+			secondLine+="$YELLOW\$$NORMAL "
+		elif [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+			secondLine+="$BLUE\$$NORMAL ";
+		else
+			secondLine+="\$ ";
+		fi
+	fi
 
 	# Resseting colors and such fur user input.
 	export PS1="$firstLine$secondLine${NORMAL}"
