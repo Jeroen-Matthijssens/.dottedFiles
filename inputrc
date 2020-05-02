@@ -9,9 +9,9 @@ $if mode=vi
 	# normal mode
 	set keymap vi-command
 	"d": backward-char
+	"n": forward-char
 	"h": previous-history
 	"t": next-history
-	"n": forward-char
 
 	"H": beginning-of-history
 	"T": end-of-history
