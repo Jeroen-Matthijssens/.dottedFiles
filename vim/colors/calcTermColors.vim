@@ -199,7 +199,7 @@ endfun
 fun! SetColor(group, fg, bg, attr )
 	let l:fge = empty(a:fg)
 	let l:bge = empty(a:bg)
-	
+
 	if !l:fge && !l:bge
 		exec "hi ".a:group." guifg=#".a:fg." guibg=#".a:bg." ctermfg=".s:rgb(a:fg)." ctermbg=".s:rgb(a:bg)
 	elseif !l:fge && l:bge
@@ -207,7 +207,7 @@ fun! SetColor(group, fg, bg, attr )
 	elseif l:fge && !l:bge
 		exec "hi ".a:group." guifg=NONE guibg=#".a:bg." ctermfg=NONE ctermbg=".s:rgb(a:bg)
 	endif
-	
+
 	if a:attr == ""
 		exec "hi ".a:group." gui=none cterm=none"
 	else
