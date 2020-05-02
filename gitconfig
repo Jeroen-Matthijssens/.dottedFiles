@@ -26,5 +26,6 @@
 			git status -s; \
 		) done \
 	}; f"
+	fpush = push --force-with-lease
 [fetch]
 	prune = true
