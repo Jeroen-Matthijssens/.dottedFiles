@@ -29,3 +29,5 @@
 	fpush = push --force-with-lease
 [fetch]
 	prune = true
+[push]
+	followTags = true
