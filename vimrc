@@ -2,6 +2,13 @@
 " "------------------------------------------------------------------------------------" "
 " "General settings"
 
+" Prefer utf-8 encodings
+" https://unix.stackexchange.com/questions/23389/how-can-i-set-vims-default-encoding-to-utf-8
+" http://vimdoc.sourceforge.net/htmldoc/options.html#%27fileencodings%27
+
+set encoding=utf-8
+scriptencoding utf-8
+
 set directory=$HOME/.vim/swps//
 set backupdir=$HOME/.vim/bcks//
 set undodir=$HOME/.vim/undo//
