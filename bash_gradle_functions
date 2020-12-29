@@ -1,29 +1,32 @@
 if [ -n "$(which gradle)" ]; then
 	function gradle-wrapper-setup () {
 		local build_file="${1:-wrapper.gradle}";
-		local bck_dir="$(mktemp -d ".gradlew-setup-XXXX")";
+		local alt_settings="";
+		local gradle="$(! [ "${1}" == '--native' ] && [ -f "./gradlew" ] && echo "./gradlew" || which gradle)"
 
 		if [ ! -f "${build_file}" ]; then
 			build_file="build.gradle"
 		fi
 
-		if [ -f "settings.gradle" ];then
-			mv "settings.gradle" "${bck_dir}/.";
-		fi
-		if [ -f "build.gradle" ] && ! [ "${build_file}" = "build.gradle" ]; then
-			mv "build.gradle" "${bck_dir}/.";
-		fi
-		if [ -f "${build_file}" ] && ! [ "${build_file}" = "build.gradle" ]; then
-			cp "${build_file}" "build.gradle";
-		fi
+		if [ -f "settings.gradle" ] && ! [ "${build_file}" = "build.gradle" ]; then
+			local alt_settings="$(mktemp ".alt-settings.gradle.XXXX")";
+			cat > "${alt_settings}" <<-EOF
+				if (startParameter.buildFile) {
+					rootProject.buildFileName = startParameter.buildFile.name
+				}
+			EOF
 
-		$(which gradle) wrapper
-		local code=$?
+			${gradle} --settings-file "${alt_settings}" --build-file "${build_file}" wrapper "$@"
+			local code=$?
 
-		mv "${bck_dir}/"* .;
-		rmdir "${bck_dir}";
+			rm "${alt_settings}"
 
-		return ${code};
+			return ${code};
+		else
+			${gradle} wrapper
+			local code=$?
+			return ${code};
+		fi
 	}
 
 	function gradle-ext () {
