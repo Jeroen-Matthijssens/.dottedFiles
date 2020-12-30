@@ -56,3 +56,5 @@ export HISTIGNORE="&:ls:ll:[bf]g:exit:,q:cd"
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 	. /etc/bash_completion
 fi
+
+export EXA_COLORS='da=32:uu=0:gu=0:ur=0:uw=0:ux=0:gr=0:gw=0:tr=0:tw=0'

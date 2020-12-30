@@ -1,5 +1,6 @@
 alias ls="ls -G"
-alias ll="ls -lhtF"
+# alias ll="ls -lhtF"
+alias ll="exa --long --git --group-directories-first --sort=size -F"
 alias youtube-dl="youtube-dl -t -c"
 alias ,q="exit"
 alias tree="tree -CF"
