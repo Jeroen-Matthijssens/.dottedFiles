@@ -1,0 +1,22 @@
+fg          : #E6E6E6
+bg          : #212121
+selection   : #525252
+cursor      : #606060
+
+Black,    0 : #5F5F5F
+Red,      1 : #E64F4F
+Green,    2 : #B8D68C
+Yellow,   3 : #E1AA5D
+Blue,     4 : #7DC1CF
+Magenta,  5 : #9864FB
+Cyan,     6 : #6D878D
+White,    7 : #BFBFBF
+
+Black,    8 : #525252
+Red,      9 : #D23D3D
+Green,   10 : #A0CF5D
+Yellow,  11 : #F37D21
+Blue,    12 : #4E9FB1
+Magenta, 13 : #8542FF
+Cyan,    14 : #42717B
+White,   15 : #717171
