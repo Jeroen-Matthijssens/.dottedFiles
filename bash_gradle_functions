@@ -1,4 +1,4 @@
-if [ -n "$(which gradle)" ]; then
+if [ -n "$(which gradle 2> /dev/null)" ]; then
 	function gradle-wrapper-setup () {
 		local build_file="${1:-wrapper.gradle}";
 		local alt_settings="";
