@@ -9,6 +9,10 @@ if [[ -f ~/.dottedFiles/bash_aliases ]]; then
 	. ~/.dottedFiles/bash_aliases
 fi
 
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+	. /usr/share/bash-completion/bash_completion
+fi
+
 if [[ -f ~/.bash_aliases ]]; then
 	. ~/.bash_aliases;
 fi
