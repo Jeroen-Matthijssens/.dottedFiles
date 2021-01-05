@@ -60,7 +60,7 @@ Do this for both yourself and the root user.
 .. code-block:: terminal
 
     $ sudo pacman -S bash-completion xclip bat
-    $ sudo pacman -S tmux exa jq
+    $ sudo pacman -S tmux exa jq youtube-dl
 
 
 .. rubric:: enable git auto completion
