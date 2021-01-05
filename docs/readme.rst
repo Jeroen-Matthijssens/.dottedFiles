@@ -61,6 +61,7 @@ Do this for both yourself and the root user.
 
     $ sudo pacman -S bash-completion xclip bat
     $ sudo pacman -S tmux exa jq youtube-dl
+    $ sudo pacman -S docker docker-compose
 
 
 .. rubric:: enable git auto completion
