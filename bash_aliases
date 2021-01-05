@@ -15,7 +15,7 @@ if command -v youtube-dl > /dev/null 2>&1; then
 fi
 
 if command -v exa > /dev/null 2>&1; then
-	alias ll="exa --long --git --group-directories-first --sort=size -F"
+	alias ll="exa --long -g --git --group-directories-first --sort=size -F"
 	alias tree="ll --tree"
 	alias dir="ll -D"
 else
