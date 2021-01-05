@@ -1,0 +1,28 @@
+#! /usr/env/bin sh
+
+root="${HOME}/.local/jdks"
+
+create_script () {
+	local cmd="${1}"
+	local file="${root}/bin/${cmd}"
+
+	cat > "${file}" <<-EOF
+		#! /usr/bin/env sh
+
+		current="\${JAVA_HOME}"
+		if [ -z "\${current}" ]; then
+			current="${root}/current"
+		fi
+
+		echo "\${current}/bin/${cmd}" "\$@"
+		"\${current}/bin/${cmd}" "\$@"
+	EOF
+
+	chmod +x "${file}"
+}
+
+[ -d "${root}/bin" ] || mkdir "${root}/bin"
+
+for cmd in $(ls "${root}/current/bin"); do
+	create_script "${cmd}"
+done
