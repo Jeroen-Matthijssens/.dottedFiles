@@ -46,6 +46,15 @@ Do this for both yourself and the root user.
     $ # repeat previous steps
 
 
+.. rubric:: install git plugins
+
+.. code-block:: terminal
+
+    $ mkdir ~/.vimplugins
+    $ cd ~/.vimplugins
+    $ git clone https://github.com/scrooloose/nerdtree.git
+
+
 .. rubric:: Install tools
 
 .. code-block:: terminal
