@@ -117,9 +117,8 @@ see https://blog.simos.info/avestan-keyboard-layout/ for inspiration
 
 .. rubric:: generate new private key and add change dotted file
 
-
 .. rubric:: setup rst documentation site generator
 
+.. rubric:: setup google drive integration?
 
-
-
+.. rubric:: setup java (https://adoptopenjdk.net)
