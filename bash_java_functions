@@ -14,7 +14,6 @@ create_script () {
 			current="${root}/current"
 		fi
 
-		echo "\${current}/bin/${cmd}" "\$@"
 		"\${current}/bin/${cmd}" "\$@"
 	EOF
 
