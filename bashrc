@@ -25,6 +25,10 @@ if [[ -f ~/.dottedFiles/bash_gradle_functions ]]; then
 	. ~/.dottedFiles/bash_gradle_functions;
 fi
 
+if [[ -f ~/.dottedFiles/bash_mvn_functions ]]; then
+	. ~/.dottedFiles/bash_mvn_functions;
+fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
