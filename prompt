@@ -20,7 +20,7 @@ DIV_CHAR="◆"
 ERROR="$RED\342\234\227"; SUCCES="$BGREEN\342\234\223"
 JOBS_CHAR="⟁"
 
-TRI_CLOSE="⮀"
+TRI_CLOSE="▶"
 
 git_branch_name () {
 	echo "$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
