@@ -1,16 +1,11 @@
-[color]
-	ui = true
 [core]
 	editor = vim
 	excludesfile = ~/.dottedFiles/gitignore_global
 [alias]
 	lg = "log -n 30 --pretty=format:'%C(yellow)%h%C(reset)%C(red)%d %C(reset)%s %C(blue)[%ar, %ad, %an]%C(reset)' --graph --date=short"
-	ll = "log --oneline --graph --decorate -n 30"
+	ll = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff --decorate $@; }; f"
 	top = "rev-parse --show-toplevel"
 	last = "log --decorate --numstat -n 1"
-	save = "!git add -A && git commit -m 'SAVEPOINT'"
-	wipe = "!git add -A && git commit -m 'WIPE SAVEPOINT' && git reset HEAD~1 --hard"
-	fixup = "commit --amend --no-edit"
 	dirties = "!f () { \
 		for dir in $(find . -type d -maxdepth 1); do ( \
 			if ! [ -d ${dir}/.git ]; then \
@@ -31,3 +26,16 @@
 	prune = true
 [push]
 	followTags = true
+[merge]
+	conflictStyle = diff3
+	tool = vimdiff
+[mergetool "vimdiff"]
+	layout = "LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE + (LOCAL/BASE/REMOTE) , MERGED"
+[mergetool "idea"]
+	cmd = idea merge $LOCAL $REMOTE $BASE $MERGED --wait
+	trustExitCode = true
+[diff]
+	algorithm = histogram
+	tool = vimdiff
+[init]
+	defaultBranch = master
