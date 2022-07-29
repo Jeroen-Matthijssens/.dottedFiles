@@ -29,5 +29,4 @@ $if mode=vi
 	# remap escape
 	"hh": vi-movement-mode
 
-$endif 
-
+$endif
