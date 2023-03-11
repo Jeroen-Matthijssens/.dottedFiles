@@ -37,5 +37,8 @@
 [diff]
 	algorithm = histogram
 	tool = vimdiff
+	wsErrorHighlight = all
 [init]
 	defaultBranch = master
+[log]
+	date = iso
