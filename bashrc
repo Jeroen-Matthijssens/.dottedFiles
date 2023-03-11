@@ -13,6 +13,10 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
 	. /usr/share/bash-completion/bash_completion
 fi
 
+if [[ -f /usr/share/fzf/completion.bash ]]; then
+	. /usr/share/fzf/completion.bash
+fi
+
 if [[ -f ~/.bash_aliases ]]; then
 	. ~/.bash_aliases;
 fi

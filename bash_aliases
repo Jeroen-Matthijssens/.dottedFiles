@@ -2,6 +2,10 @@ alias ls="ls -G"
 alias ,q="exit"
 alias grep="grep --color"
 
+if command -v fzf > /dev/null 2>&1; then
+	alias ff='fzf --border --height 40% --reverse'
+fi
+
 if command -v xclip > /dev/null 2>&1; then
 	alias pbcopy='xclip -in -selection clip'
 fi
@@ -26,4 +30,8 @@ else
 	alias ll="ls -lhtF"
 	alias tree="tree -CF"
 	alias dir="ls -lhtd */"
+fi
+
+if command -v tmux > /dev/null 2>&1; then
+	alias ,qa="tmux kill-window"
 fi
