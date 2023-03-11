@@ -50,8 +50,17 @@ function setup () {
 	tmux select-window -t 0
 }
 
+if [ -z "${TMUX}" ]; then
+	echo 'not run from a tmux sessions' >&2;
+	exit 1;
+fi
+
 case "${1}" in
 	'services') layout_double_split_top;;
 	'develop') layout_split_top_with_bottom;;
-	*) setup;;
+	'') setup;;
+	*)
+		echo "not a valid layout: '${1}'" >&2
+		exit 1
+		;;
 esac
