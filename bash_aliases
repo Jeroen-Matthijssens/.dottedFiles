@@ -35,3 +35,7 @@ fi
 if command -v tmux > /dev/null 2>&1; then
 	alias ,qa="tmux kill-window"
 fi
+
+if command -v nvim > /dev/null 2>&1; then
+	alias vim="nvim"
+fi
