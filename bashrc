@@ -45,9 +45,11 @@ complete -cf sh
 export EDITOR="vim"
 
 # Use vim to read man pages.
-export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-    vim -R -c 'set ft=man nomod nolist' -c 'set foldcolumn=2' -c 'set nonu' \
-    -c 'highlight FoldColumn ctermfg=241 ctermbg=234' -\""
+#
+# export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+#     vim -R -c 'set ft=man nomod nolist' -c 'set foldcolumn=2' -c 'set nonu' \
+#     -c 'highlight FoldColumn ctermfg=241 ctermbg=234' -\""
+export MANPAGER='nvim +Man!'
 
 # History settings.
 
