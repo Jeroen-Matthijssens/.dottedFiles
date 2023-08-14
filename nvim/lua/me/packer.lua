@@ -16,8 +16,17 @@ return require ('packer').startup (function (use)
 	})
 
 	use ({ 'nvim-treesitter/playground' })
-	use ({ 'tpope/vim-fugitive' })
+	-- use ({ 'tpope/vim-fugitive' })
 	use ({ 'airblade/vim-gitgutter' })
 	use ({ 'mbbill/undotree' })
+
+	use ({
+		'nvim-neo-tree/neo-tree.nvim', branch = 'v3.x',
+		requires = { 
+			'nvim-lua/plenary.nvim',
+			'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+			'MunifTanjim/nui.nvim'
+		}
+	})
 
 end)

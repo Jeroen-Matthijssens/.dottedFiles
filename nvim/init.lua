@@ -15,6 +15,8 @@
 require ('me.packer')
 require ('me.keymapping')
 require ('me.treesitter')
+require ('me.neo-tree')
+
 
 vim.opt.directory = vim.fn.stdpath('state') .. '/nvim/swaps//'
 vim.opt.backupdir = vim.fn.stdpath('state') .. '/nvim/backup//'

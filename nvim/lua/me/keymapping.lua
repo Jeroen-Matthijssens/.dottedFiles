@@ -140,5 +140,4 @@ vim.keymap.set ('n', '<leader>ps', function()
 end)
 
 vim.keymap.set ({ 'n', 'v', 'o' }, '<leader>u', vim.cmd.UndotreeToggle)
--- vim.keymap.set ('n', '<leader>gs', vim.cmd.Git)
 vim.keymap.set ({ 'n', 'v', 'o' }, '<leader>ff', '<cmd>Telescope file_browser<cr>')
