@@ -6,7 +6,10 @@ if command -v fzf > /dev/null 2>&1; then
 	alias ff='fzf --border --height 40% --reverse'
 fi
 
-if command -v xclip > /dev/null 2>&1; then
+if command -v wl-copy > /dev/null 2>&1; then
+	alias pbcopy='wl-copy'
+	alias pbpaste='wl-paste'
+elif command -v xclip > /dev/null 2>&1; then
 	alias pbcopy='xclip -in -selection clip'
 fi
 
