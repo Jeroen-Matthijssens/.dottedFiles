@@ -1,9 +1,10 @@
 return require ('packer').startup (function (use)
+
 	use ({ 'wbthomason/packer.nvim' })
 
 	use ({
-		'nvim-telescope/telescope.nvim', tag = '0.1.1',
-		requires = { {'nvim-lua/plenary.nvim'} }
+		'nvim-telescope/telescope.nvim', tag = '0.1.4',
+		requires = { 'nvim-lua/plenary.nvim' }
 	})
 
 	use ({
@@ -11,13 +12,10 @@ return require ('packer').startup (function (use)
 		requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
 	})
 
-	use ({
-		'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }
-	})
+	use ({ 'nvim-treesitter/nvim-treesitter' })
 
-	use ({ 'nvim-treesitter/playground' })
 	-- use ({ 'tpope/vim-fugitive' })
-	use ({ 'airblade/vim-gitgutter' })
+	use ({ 'airblade/vim-gitgutter', tag = 'main' })
 	use ({ 'mbbill/undotree' })
 
 	use ({
@@ -28,5 +26,7 @@ return require ('packer').startup (function (use)
 			'MunifTanjim/nui.nvim'
 		}
 	})
+
+	use ({ 'catppuccin/nvim', as = 'catppuccin' })
 
 end)

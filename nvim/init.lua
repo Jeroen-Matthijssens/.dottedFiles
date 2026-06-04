@@ -33,11 +33,11 @@ vim.opt.scrolloff = 10
 vim.opt.textwidth = 90
 vim.opt.colorcolumn = '+1'
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-
-vim.cmd.colorscheme ('simple')
 
 vim.opt.list = true
 vim.opt.listchars:append ({
@@ -62,3 +62,19 @@ require ('telescope').setup ({
 });
 
 require ('telescope').load_extension ('file_browser')
+
+require ('catppuccin').setup {
+	custom_highlights = function (colors)
+		local highlights = {}
+
+		local spell_options = { style = {"underline"}, fg = colors.red }
+		local spell_groups = { 'SpellBad', 'SpeellCap', 'SpeelLocal', 'SpeelRare' }
+		for _, v in ipairs(spell_groups) do
+			highlights[v] = spell_options
+		end
+
+		return highlights
+	end
+}
+
+vim.cmd.colorscheme ('catppuccin-mocha')
