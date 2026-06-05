@@ -5,8 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [[ -f ~/.dottedFiles/bash_aliases ]]; then
-	. ~/.dottedFiles/bash_aliases
+if [[ -f ~/.dottedFiles/bash/bash_aliases ]]; then
+	. ~/.dottedFiles/bash/bash_aliases
 fi
 
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
@@ -21,16 +21,16 @@ if [[ -f ~/.bash_aliases ]]; then
 	. ~/.bash_aliases;
 fi
 
-if [[ -f ~/.dottedFiles/prompt ]]; then
-	. ~/.dottedFiles/prompt;
+if [[ -f ~/.dottedFiles/bash/prompt ]]; then
+	. ~/.dottedFiles/bash/prompt;
 fi
 
-if [[ -f ~/.dottedFiles/bash_gradle_functions ]]; then
-	. ~/.dottedFiles/bash_gradle_functions;
+if [[ -f ~/.dottedFiles/bash/bash_gradle_functions ]]; then
+	. ~/.dottedFiles/bash/bash_gradle_functions;
 fi
 
-if [[ -f ~/.dottedFiles/bash_mvn_functions ]]; then
-	. ~/.dottedFiles/bash_mvn_functions;
+if [[ -f ~/.dottedFiles/bash/bash_mvn_functions ]]; then
+	. ~/.dottedFiles/bash/bash_mvn_functions;
 fi
 
 # check the window size after each command and, if necessary,
@@ -44,11 +44,7 @@ complete -cf sh
 
 export EDITOR="nvim"
 
-# Use vim to read man pages.
-#
-# export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-#     vim -R -c 'set ft=man nomod nolist' -c 'set foldcolumn=2' -c 'set nonu' \
-#     -c 'highlight FoldColumn ctermfg=241 ctermbg=234' -\""
+# Use neovim to read man pages.
 export MANPAGER='nvim +Man!'
 
 # History settings.
