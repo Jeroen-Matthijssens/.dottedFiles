@@ -1,5 +1,4 @@
 [core]
-	editor = vim
 	excludesfile = ~/.dottedFiles/gitignore_global
 [alias]
 	lg = "log -n 30 --pretty=format:'%C(yellow)%h%C(reset)%C(red)%d %C(reset)%s %C(blue)[%ar, %ad, %an]%C(reset)' --graph --date=short"

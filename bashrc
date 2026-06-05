@@ -42,7 +42,7 @@ complete -cf sudo
 complete -cf man
 complete -cf sh
 
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Use vim to read man pages.
 #
