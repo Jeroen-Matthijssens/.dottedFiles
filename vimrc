@@ -9,9 +9,9 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-set directory=$HOME/.vim/swps//
-set backupdir=$HOME/.vim/bcks//
-set undodir=$HOME/.vim/undo//
+set directory=$HOME/.local/share/vim/swps//
+set backupdir=$HOME/.local/share/vim/bcks//
+set undodir=$HOME/.local/share/vim/undo//
 set nocompatible          " don't behave strongly vi-compatible. Should be at the top.
 set hidden                " buffers stay open, don't close when opening a new file.
 set backspace=2           " backspace goes over newlines
@@ -28,7 +28,6 @@ set ttyfast               " Should help improve scrolling (more characters are s
 set laststatus=2          " Always show status line "
 set undofile              " Keep undo information after vim session is closed
 set autoread              " automatically read files changes outside of vim?
-execute pathogen#infect("~/.vimplugins/{}")
 
 " Ignore case for searches Unless you type an uppercase letter, enable incremental
 " searching. Prepend a \v to every string you search for or you don't have to escape
@@ -186,14 +185,6 @@ nnoremap <leader>l :source $MYVIMRC<cr>
 nnoremap + <C-a>
 nnoremap - <C-x>
 
-" map NerdTree command
-nnoremap <F4> :NERDTreeToggle<cr>
-nnoremap <F3> :NERDTreeMirror<cr>
-
-" map TlistToggle command
-nnoremap <F5> :TlistToggle<cr>
-let Tlist_Use_Right_Window = 1
-
 " use space to toggle foldings
 vnoremap <space> zf
 nnoremap <space> za
@@ -211,15 +202,6 @@ vnoremap < <gv
 
 
 " "------------------------------------------------------------------------------------" "
-" "Ultisnip options."
-"
-
-let UltiSnipsExpandTrigger="<S-tab>"
-let UltiSnipsJumpForwardTrigger="<S-tab>"
-let UltiSnipsJumpBcakwardTrigger="<C-tab>"
-
-
-" "------------------------------------------------------------------------------------" "
 " "Indentation options"
 "
 
@@ -234,49 +216,6 @@ filetype indent on
 set shiftwidth=4
 set tabstop=4
 
-" Signify
-let signify_sign_add               = '✜'
-let signify_sign_change            = '▸'
-let signify_sign_delete            = '✗'
-let signify_sign_delete_first_line = '‾'
-let g:signify_vcs_list = [ 'git', 'svn' ]
-nnoremap <F5> :SignifyToggle<cr>
-
-" NERDTree
-" the standard keymappings don't work properly for me on dvorak
-let NERDTreeMapActivateNode    = "o"
-let NERDTreeMapChangeRoot      = "C"
-let NERDTreeMapChdir           = "cd"
-let NERDTreeMapCloseChildren   = "E"
-let NERDTreeMapCloseDir        = "e"
-let NERDTreeMapDeleteBookmark  = ""
-let NERDTreeMapMenu            = "a"
-let NERDTreeMapHelp            = "?"
-let NERDTreeMapJumpFirstChild  = ""
-let NERDTreeMapJumpLastChild   = ""
-let NERDTreeMapJumpNextSibling = "n"
-let NERDTreeMapJumpParent      = "<S-h>"
-let NERDTreeMapJumpPrevSibling = "d"
-let NERDTreeMapJumpRoot        = "<S-d>"
-let NERDTreeMapOpenExpl        = ""
-let NERDTreeMapOpenInTab       = "<S-t>"
-let NERDTreeMapOpenInTabSilent = ""
-let NERDTreeMapOpenRecursively = "<S-o>"
-let NERDTreeMapOpenSplit       = "<S-n>"
-let NERDTreeMapOpenVSplit      = "<S-s>"
-let NERDTreeMapPreview         = "g" . NERDTreeMapActivateNode
-let NERDTreeMapPreviewSplit    = "g" . NERDTreeMapOpenSplit
-let NERDTreeMapPreviewVSplit   = "g" . NERDTreeMapOpenVSplit
-let NERDTreeMapQuit            = "q"
-let NERDTreeMapRefresh         = "r"
-let NERDTreeMapRefreshRoot     = "R"
-let NERDTreeMapToggleBookmarks = "B"
-let NERDTreeMapToggleFiles     = "F"
-let NERDTreeMapToggleFilters   = "f"
-let NERDTreeMapToggleHidden    = "I"
-let NERDTreeMapToggleZoom      = ""
-let NERDTreeMapUpdir           = "u"
-let NERDTreeMapUpdirKeepOpen   = "U"
 
 " "------------------------------------------------------------------------------------" "
 " "File extensions and sintax hilighting."
@@ -284,47 +223,8 @@ let NERDTreeMapUpdirKeepOpen   = "U"
 
 set t_Co=256       " enable more colors, terminal supports them anyway"
 syntax on          " enable sintax highlighting
-if &t_Co >= 256 || has("gui_running")
-	" kind of a useless check, but set fancier color scheme
-	colorscheme simple
-else
-	" set basic color scheme
-	" does not exist anymore
-	" colorscheme eigen
-endif
 
 " add custom whitespace characters and such.
 set list
 set listchars=eol:¶,tab:»·,extends:→,precedes:←,trail:ł
 
-" More highlighting for python files
-let python_highlight_all = 1
-let java_highlight_java_lang_ids = 1
-" let java_highlight_functions = 1
-" let java_comment_strings = 1
-let java_highlight_debug = 1
-
-" make .rkt file be highlighted as scheme files.
-au BufNewFile,BufRead *.rkt set filetype=scheme
-
-
-" "------------------------------------------------------------------------------------" "
-" "Some utility functions."
-
-" Reindent using tabs instead of spaces (without having to run "gg=G".
-command! -nargs=1 Redent :call Redent(<args>)
-function! Redent( n )
-	" need to excape forward slashes
-	exec ":%s/^\\(\\t*\\)" . repeat(" ", a:n) . "/\\1\\t/g"
-endfunc
-
-" Show syntax highlighting groups for word under cursor
-nnoremap <F8> :call SynStack()<CR>
-function! SynStack()
-	if !exists("*synstack")
-		return
-	endif
-	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-let g:python_recommended_style = 0
