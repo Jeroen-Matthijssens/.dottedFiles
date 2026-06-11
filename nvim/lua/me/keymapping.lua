@@ -141,3 +141,14 @@ end)
 
 vim.keymap.set ({ 'n', 'v', 'o' }, '<leader>u', vim.cmd.UndotreeToggle)
 vim.keymap.set ({ 'n', 'v', 'o' }, '<leader>ff', '<cmd>Telescope file_browser<cr>')
+
+-- The man plugin changes the 'n' mapping which messes with the key re-bindings above. By
+-- Reapplying them for man pages specifically fixes the problem (or at least hides its
+-- effects).
+vim.api.nvim_create_autocmd ('FileType', {
+	pattern = 'man',
+	callback = function ()
+		vim.keymap.set ({ 'n', 'v', 'o' }, 'n', 'l', { buffer = true })
+		vim.keymap.set ({ 'n', 'v', 'o' }, 'k', 'n', { buffer = true })
+	end
+});
